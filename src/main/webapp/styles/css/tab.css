@@ -1,0 +1,49 @@
+/*
+Design by Metamorphosis Design
+http://www.metamorphozis.com
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+
+.tab { 
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 12px;
+	width: 80px;
+	white-space: nowrap;
+	text-align: center;
+	border-style: solid;
+	border-color: #23456B;
+	border-left-width: 2px;
+	border-right-width: 2px;
+	border-top-width: 2px;
+	border-bottom-width: 0px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	cursor: pointer;
+	}
+.tabhold { 
+	background-color: white;
+	color: #23456B;
+	}
+.tabfocus { 
+	background-color: #23456B;
+	color: white;
+	}
+.tabcontent { 
+	font-family: sans-serif; 
+	font-size: 14px;
+	width: 800px;
+	border-top:1px solid #23456B;
+	padding-top: 12px;
+	padding-left: 8px;
+	padding-right: 8px;
+	}
+
+.tablecss { 
+	margin: 1em; 
+	border-collapse: collapse; 
+}
+
+.tdcss, .thcss { 
+	padding: .3em; 
+	border: 1px #000000 solid; 
+} 

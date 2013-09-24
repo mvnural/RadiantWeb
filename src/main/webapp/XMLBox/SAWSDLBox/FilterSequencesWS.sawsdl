@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="filterSequences" targetNamespace="http://FilterSequences/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://FilterSequences/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:sawsdl="http://www.w3.org/ns/sawsdl">
+	<wsdl:types>
+		<xsd:schema xmlns="http://soap.jdispatcher.ebi.ac.uk" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://FilterSequences/">
+
+			<xsd:element name="filterByEval">
+				<xsd:complexType>
+					<xsd:sequence>
+      <xsd:element name="evalCutoff" type="xsd:string" nillable="false" minOccurs="1" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000082"/>
+      <xsd:element name="eval" type="xsd:string" minOccurs="1" nillable="false" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000082"/>
+      <xsd:element name="sequences" type="xsd:string" minOccurs="1" nillable="false" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBI_0000973"/>
+      <xsd:element name="inputType" type="xsd:string" minOccurs="0" nillable="true"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="filterByEvalResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+					        <xsd:element name="sequences" type="xsd:string" minOccurs="1" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBI_0000973">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+
+			<xsd:element name="filterByEvalScore">
+				<xsd:complexType>
+					<xsd:sequence>
+      <xsd:element name="evalCutoff" type="xsd:string" minOccurs="1" nillable="false" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000082"/>
+      <xsd:element name="scoreCutoff" type="xsd:string" minOccurs="1" nillable="false" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000073"/>
+      <xsd:element name="eval" type="xsd:string" minOccurs="1" nillable="false" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000082"/>
+      <xsd:element name="score" type="xsd:string" minOccurs="1" nillable="false" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000073"/>
+      <xsd:element name="sequences" type="xsd:string" minOccurs="1" nillable="false" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBI_0000973"/>
+      <xsd:element name="inputType" type="xsd:string" minOccurs="0" nillable="true"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="filterByEvalScoreResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+					        <xsd:element name="sequences" type="xsd:string" minOccurs="1" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBI_0000973">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+
+
+		</xsd:schema>
+	</wsdl:types>
+
+
+	<wsdl:message name="filterByEvalResponse">
+		<wsdl:part name="parameters" element="tns:filterByEvalResponse"/>
+	</wsdl:message>
+	<wsdl:message name="filterByEvalRequest">
+		<wsdl:part name="parameters" element="tns:filterByEval"/>
+	</wsdl:message>
+
+	<wsdl:message name="filterByEvalScoreResponse">
+		<wsdl:part name="parameters" element="tns:filterByEvalScoreResponse"/>
+	</wsdl:message>
+	<wsdl:message name="filterByEvalScoreRequest">
+		<wsdl:part name="parameters" element="tns:filterByEvalScore"/>
+	</wsdl:message>
+
+
+	<wsdl:portType name="JDispatcherService">
+		<wsdl:operation name="filterByEval">
+			<sawsdl:attrExtensions sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000031"/>
+			<wsdl:input name="filterByEvalRequest" message="tns:filterByEvalRequest"/>
+			<wsdl:output name="filterByEvalResponse" message="tns:filterByEvalResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="filterByEvalScore">
+			<sawsdl:attrExtensions sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000031"/>
+			<wsdl:input name="filterByEvalScoreRequest" message="tns:filterByEvalScoreRequest"/>
+			<wsdl:output name="filterByEvalScoreResponse" message="tns:filterByEvalScoreResponse"/>
+		</wsdl:operation>
+
+	</wsdl:portType>
+
+	<wsdl:binding name="JDispatcherServiceHttpBinding" type="tns:JDispatcherService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+		<wsdl:operation name="filterByEval">
+			<soap:operation soapAction="urn:filterByEval"/>
+			<wsdl:input name="filterByEvalRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="filterByEvalResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="filterByEvalScore">
+			<soap:operation soapAction="urn:filterByEvalScore"/>
+			<wsdl:input name="filterByEvalScoreRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="filterByEvalScoreResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+	</wsdl:binding>
+
+	<wsdl:service name="JDispatcherService">
+		<wsdl:port name="JDispatcherServiceHttpPort" binding="tns:JDispatcherServiceHttpBinding">
+			<soap:address location="http://FilterSequences/"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+    <mapping path="/*" decorator="/main.jsp"/>
+    <mapping path="/sawsdl.jsp" exclue="true"/>
+	<mapping path="/discovery.jsp" exclue="true"/>
+	<mapping path="/Discovery.action" exclue="true"/>
+</sitemesh>

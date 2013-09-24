@@ -1,0 +1,18 @@
+/* 
+    Document   : wsdl
+    Created on : Jul 8, 2011, 11:47:43 PM
+    Author     : Chaitu
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+

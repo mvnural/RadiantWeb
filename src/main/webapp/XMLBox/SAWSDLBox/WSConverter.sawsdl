@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://ws.apache.org/axis2" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ws.apache.org/axis2" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+ 
+    <wsdl:documentation>
+		Web service for converters
+	</wsdl:documentation>
+    <wsdl:types>
+      
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://ws.apache.org/axis2">
+         <xs:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+            
+            
+            <xs:element name="base64input" sawsdl:modelReference="http://purl.obolibrary.org/obo/obi.owl#Class_126">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="1" minOccurs="1" name="input" nillable="false" type="xs:base64Binary" sawsdl:modelReference="http://purl.obolibrary.org/obo/obi.owl#Class_126">
+  </xs:element>
+  </xs:sequence>
+  </xs:complexType>
+  </xs:element>
+
+
+            <xs:element name="base64toStringResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            
+            <xs:element name="stringArray" type="ns:ArrayOf_xsd_string" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000097">            	                           
+       		</xs:element>   
+       
+         <xs:complexType name="ArrayOf_xsd_string" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000097">
+                    <xs:sequence>
+                        <xs:element minOccurs="1" name="sequenceid" nillable="false" type="xs:string" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000097"/>
+                    </xs:sequence>
+
+
+<!--        <xs:complexContent>
+          <xs:restriction base="soapenc:Array">
+            <xs:attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[]"  />
+          </xs:restriction>
+        </xs:complexContent> -->
+      </xs:complexType>
+
+            <xs:element name="array2stringResponse" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000097">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" sawsdl:modelReference="http://purl.obolibrary.org/obo/OBIws_0000097"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="array2stringRequest">
+        <wsdl:part name="parameters" element="ns:stringArray"/>
+    </wsdl:message>
+    <wsdl:message name="array2stringResponse">
+        <wsdl:part name="parameters" element="ns:array2stringResponse"/>
+    </wsdl:message>
+    <wsdl:message name="base64toStringRequest">
+        <wsdl:part name="parameters" element="ns:base64input"/>
+    </wsdl:message>
+    <wsdl:message name="base64toStringResponse">
+        <wsdl:part name="parameters" element="ns:base64toStringResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="WSConverterPortType">
+        <wsdl:operation name="array2string">
+	    <wsdl:input message="ns:array2stringRequest" wsaw:Action="urn:array2string"/>
+            <wsdl:output message="ns:array2stringResponse" wsaw:Action="urn:array2stringResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="base64toString">
+	    <wsdl:input message="ns:base64toStringRequest" wsaw:Action="urn:base64toString"/>
+            <wsdl:output message="ns:base64toStringResponse" wsaw:Action="urn:base64toStringResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WSConverterSoap11Binding" type="ns:WSConverterPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="base64toString">
+            <soap:operation soapAction="urn:base64toString" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="array2string">
+            <soap:operation soapAction="urn:array2string" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSConverterSoap12Binding" type="ns:WSConverterPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="base64toString">
+            <soap12:operation soapAction="urn:base64toString" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="array2string">
+            <soap12:operation soapAction="urn:array2string" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSConverterHttpBinding" type="ns:WSConverterPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="base64toString">
+            <http:operation location="WSConverter/base64toString"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="base64toString"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="base64toString"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="array2string">
+            <http:operation location="WSConverter/array2string"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="array2string"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="array2string"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WSConverter">
+        <wsdl:port name="WSConverterHttpSoap11Endpoint" binding="ns:WSConverterSoap11Binding">
+            <soap:address location="http://localhost:8080/WSConverter/services/WSConverter.WSConverterHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSConverterHttpSoap12Endpoint" binding="ns:WSConverterSoap12Binding">
+            <soap12:address location="http://localhost:8080/WSConverter/services/WSConverter.WSConverterHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSConverterHttpEndpoint" binding="ns:WSConverterHttpBinding">
+            <http:address location="http://localhost:8080/WSConverter/services/WSConverter.WSConverterHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,38 @@
+/* 
+    Document   : WsdlFormat
+    Created on : May 25, 2009, 2:05:18 AM
+    Author     : Srikalyan Swayampakula
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+html, body {height:100%; margin: 0; padding: 0; }
+
+html>body {
+	font-size: 16px;
+	font-size: 68.75%;
+} /* Reset Base Font Size */
+
+body {
+	font-family: Verdana, helvetica, arial, sans-serif;
+	font-size:1em;
+	background: #fff;
+	color: #333;
+}
+#main { padding: 1em; }
+
+div
+{
+    white-space:nowrap;    
+}
+
+#main div
+{
+    white-space:nowrap;
+    font-size:1em;
+}

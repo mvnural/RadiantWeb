@@ -1,0 +1,360 @@
+/*
+Design by Metamorphosis Design
+http://www.metamorphozis.com
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+
+*
+{
+border: 0;
+margin: 0;
+}
+
+form {
+margin:0px;
+padding: 0px;
+border: none;
+text-align:left;}
+
+fieldset {
+padding: 0px;
+}
+
+img
+{
+border: 0px;
+}
+
+body{
+	font: 12px Arial, Helvetica, sans-serif;
+	color: #000000;
+	line-height:20px;
+}
+
+#bg {
+}
+
+#main {
+	width: 970px;
+	margin: 0px auto;
+	border-left: 3px solid #FFFFFF;
+	border-right: 3px solid #FFFFFF;
+	
+}
+
+
+#header { 
+width:970px;
+padding: 0px 0px 0px 0px;
+height: 265px;
+}
+
+#logo {
+		color:#FFFFFF;
+		padding: 0px 10px 0px 0px;
+		background: url(../images/logo.jpg) 0px 0px no-repeat;
+		height: 213px;
+}
+
+#logo a {
+		color:#FFFFFF;
+		text-decoration: none;
+}
+
+#logo H2 {
+		font-size: 13px;
+}
+
+#search {
+padding-top: 0px;
+padding-left:0px;
+height: 22px;
+width: 300px;
+float:right;
+}
+
+#search form {
+	margin: 0;
+}
+
+#search input {
+	float: left;
+	font: 12px Arial, Helvetica, sans-serif;
+}
+
+#search-text {
+	width: 180px;
+	height: 15px;
+	font-size: 12px;
+	padding: 2px 5px 2px 5px;
+	border: none;
+	background: #FFFFFF;
+	background-repeat:no-repeat;
+	background-position:left top;
+	color: #000000;
+	border: 1px solid #12537C;
+	margin-top: 15px;
+}
+
+#search-submit {
+	width: 76px;
+	height: 29px;
+	background: url(../images/b_search.gif) left top no-repeat;
+	background-repeat:no-repeat;
+	background-position:left top;
+	border: none;
+	margin-left: 6px;
+	margin-top: 10px;
+}
+
+#search fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+.CNGH {
+font-family: Georgia, "Times New Roman", Times, serif;
+font-size:18px;
+padding: 160px 0px 0px 700px;
+font-style:italic;
+font-weight:bold;
+}
+
+#buttons{
+	width: 970px;
+	height: 49px;
+	background: url(../images/but_bg.jpg) repeat-x;
+	text-align:center;
+	padding-left: 0px
+}
+
+.but {
+float:left;}
+
+
+#buttons a {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 18px;
+	font-weight:normal;
+	display: block;
+	float: left;
+	width: 140px;
+	height: 35px;
+	text-decoration: none;
+	color: #FFFFFF;
+	padding-top: 14px;
+	text-align: center;
+	font-weight:bold;
+}
+
+
+#buttons a:hover {
+	text-decoration: underline;
+	background: url(../images/over.jpg)  0px repeat-x;
+}
+
+#content{
+	width: 949px;
+	padding: 8px 5px 15px 16px;
+	background: #D9D8D9;
+	margin: 0px 0px 0px 0px;
+}
+
+#right{
+	width: 285px;
+	margin: 0px 0px 5px 0px;
+	float: right;
+	color:#000000;
+}
+
+.right_b {	background: url(../images/fish_inp.png) 9px 20px no-repeat;
+		padding-left: 29px;
+		padding-top: 15px;
+		width: 256px;}
+
+
+.img {	float:right;
+		margin: 5px 0px 5px 12px;
+}
+
+span {	color:#12537C;
+		font-weight:bold;
+}
+
+.dat { text-decoration: underline;
+		color:#0D2C55;}
+.dot {
+border-bottom: 1px dotted #12537C;
+color:#12537C;
+font-weight:bold; 
+padding-top:5px;
+text-decoration:none;
+height:30px;}
+
+.spis {padding: 3px 0px 0px 0px;
+list-style-type: none;}
+.spis li {
+padding-top: 5px;}
+		
+.col_b {color:#0D2C55;}
+
+#right H1{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size:18px;
+	font-weight: bold;
+	color: #23456B;
+	text-align: left;
+	background: url(../images/tit.gif) bottom repeat-x;
+	padding-top: 10px;
+	padding-bottom: 3px;
+}
+
+#left H2{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size:18px;
+	font-weight: bold;
+	color: #12537C;
+	padding-bottom: 3px;
+	padding-top: 4px;
+	text-align: left;
+	background: url(../images/tit.gif) bottom repeat-x;
+	width: 100%;
+	padding-top: 10px;
+}
+
+.more{
+	text-align:right;
+	padding-right:10px;
+	padding-top: 5px;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+#log{
+	background: url(../images/inp_bg.jpg) top no-repeat #FFFFFF;
+	padding-left: 9px;
+	padding-right: 9px;
+	padding-bottom: 20px;
+	border: 1px solid #385E8A;
+	
+}
+
+#log fieldset {
+	border: none;
+}
+
+#log label {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #12537C;
+	text-align:left;
+	padding-bottom: 43px;
+	padding-top: 10px;
+	line-height: 25px;
+}
+
+#login-submit{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #ffffff;
+	width: 60px;
+	height: 18px;
+	background: url(../images/b_login.gif) left top no-repeat;
+	border: none;
+	margin: 15px 0px 10px 200px;
+}
+
+#text1, #text2 {
+	width: 250px;
+	height: 14px;
+	padding-top: 2px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border: none;
+	background: #FFFFFF;
+	background-repeat:no-repeat;
+	background-position:left top;
+	color: #000000;
+	padding-bottom: 5px;
+	border: 1px solid #02525D;
+}
+
+#right #log a{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #12537C;
+}
+
+#right #log a:hover{
+	color: #12537C;
+	text-decoration: none;
+}
+
+#log H3{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 18px;
+	font-weight: bold;
+	color: #1F4066;
+	text-align:center;
+	padding: 7px 0px 5px 0px;
+}
+
+.col_l { padding: 10px 5px 0px 0px;}
+
+#left{
+float: left;
+width: 648px;
+background: url(../images/bg_left.jpg) left 25px repeat-x;
+margin-right: 0px;
+padding: 0px 0px 0px 0px;
+}
+
+#center{
+float: left;
+width: 938px;
+background: url(../images/bg_left.jpg) left 25px repeat-x;
+margin-right: 0px;
+padding: 0px 0px 0px 0px;
+}
+
+.tit_bot { background:url(../images/bot_bg.png) left top no-repeat;}
+
+#center H2{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size:18px;
+	font-weight: bold;
+	color: #12537C;
+	padding-bottom: 3px;
+	padding-top: 4px;
+	text-align: left;
+	background: url(../images/tit.gif) bottom repeat-x;
+	width: 100%;
+	padding-top: 10px;
+}
+
+#footer{
+	height: 44px;
+	width: 100%;
+	font-size: 10px;
+	color: #FFFFFF;
+	text-align: center;
+	clear:both;
+	padding: 8px 0px 0px 0px;
+	background: url(../images/bot.jpg) bottom repeat-x;
+}
+
+#footer a{
+	color: #FFFFFF;
+	font-size: 10px;
+	text-decoration: none;
+}
+
+#footer a:hover{
+	color: #FFFFFF;
+	font-size: 10px;
+	text-decoration: underline;
+}

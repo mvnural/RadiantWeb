@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+<constant name="struts.multipart.maxSize" value="10000000"></constant>
+<package name="struts2test" extends="struts-default">
+<!-- set up Action class to deal with the jsp of success and error-->
+	
+	<!-- Discover the appropriate operation  -->
+	<action name="Discovery" class="edu.uga.cs.lumina.discovery.action.Discovery">
+		<result name="input">/discovery.jsp</result>
+		<result name="success">/discoveryResult.jsp</result>
+		<result name="error">/error.jsp</result>
+	</action>
+	
+	<!-- search the WSDL from Biocatalogue Web -->
+	<action name="SearchWSDL" class="edu.uga.cs.lumina.discovery.action.SearchWSDL">
+		<result name="success">/search.jsp</result>
+		<result name="error">/error.jsp</result> 
+	</action>
+	
+	<!-- get WSDL file treeview in search.jsp -->
+	<action name="getWsTree" class="edu.uga.cs.lumina.discovery.action.GetWsTree">
+		<result name = "success">/wstree.jsp</result>
+		<result name = "error">/error.jsp</result>
+	</action>
+	
+	<!-- get the WSDL file -->
+	<action name="downloadWSDL" class="edu.uga.cs.lumina.discovery.action.DownloadWSDL">
+		<result name="success" type="stream">
+			<param name="contentType">application/octet-stream</param>
+			<param name="inputName">fileInputStream</param>
+			<param name="contentDisposition">attachment;filename="${fileName}"</param>
+			<param name="bufferSize">1024</param>
+		</result>
+		<result name="error">/error.jsp</result> 
+	</action>
+	
+	<!-- login action -->
+	<action name="login" class="edu.uga.cs.radiant.struts2.action.Login">
+		<result name="error">/error.jsp</result>
+		<result name="success">/myPage.jsp</result>
+	</action>
+	
+	<!-- logout action -->
+	<action name="logout" class="edu.uga.cs.radiant.struts2.action.Logout">
+		<result name="error">/error.jsp</result>
+		<result name="success">/index.jsp</result>
+	</action>
+	
+</package>
+
+<package name="example"  extends="json-default">  
+	
+	<!-- get the OWL file treeview(HTML) -->
+	<action name="loadOWL" class="edu.uga.radiant.ajax.LoadOWL">
+		<result name="success" type="json"/>
+		<result name="input">/error.jsp</result>
+		<result name="error" type="json"/>
+	</action>
+	
+	<!-- get the WSDL/WADL file treeview(HTML) -->
+	<action name="loadWS" class="edu.uga.radiant.ajax.LoadWS">
+		<result name="success" type="json"/>
+		<result name="input">/error.jsp</result>
+		<result name="error" type="json"/>
+	</action>
+	
+	<!-- get the XML text(HTML format) to display on screen -->
+	<action name="loadWSXml" class="edu.uga.radiant.ajax.LoadWSXml">
+		<result name="success" type="json"/>
+		<result name="input">/error.jsp</result>
+		<result name="error" type="json"/>
+	</action>
+	
+	<!-- give the text then get the suggested OWLClass -->
+	<action name="recommendConcept" class="edu.uga.radiant.ajax.RecommendConcept">
+		<result name="success" type="json"/>
+		<result name="input">/error.jsp</result>
+		<result name="error" type="json"/>
+	</action>
+	
+	<!-- give the text then get the suggested OWLClass -->
+	<action name="recommendAll" class="edu.uga.radiant.ajax.RecommendAll">
+		<result name="success" type="json"/>
+		<result name="input">/error.jsp</result>
+		<result name="error" type="json"/>
+	</action>
+	
+	<!-- set the ontology operation/parameter super class -->
+	<action name="setOntologyOptions" class="edu.uga.radiant.ajax.SetOntologyOptions">
+		<result name="success" type="json"/>
+		<result name="input">/discovery.jsp</result>
+		<result name="error" type="json"/>
+	</action>
+	
+	<!-- get the search result from ontology -->
+	<action name="searchOntologyTerm" class="edu.uga.radiant.ajax.SearchOntologyTerm">
+		<result name="success" type="json"/>
+		<result name="input">/discovery.jsp</result>
+		<result name="error" type="json"/>
+	</action>
+	
+	<!-- get the auto complete words -->
+	<action name="loadSuggest" class="edu.uga.radiant.ajax.LoadSuggest">
+		<result name="success" type="json"/>
+		<result name="input">/discovery.jsp</result>
+		<result name="error" type="json"/>
+	</action>
+	
+	<!-- update the web service file in session -->
+	<action name="updateWS" class="edu.uga.radiant.ajax.UpdateWS">
+		<result name="success" type="json"/>
+		<result name="input">/error.jsp</result>
+		<result name="error" type="json"/>
+	</action>
+	
+	<!-- save the web service file to database -->
+	<action name="saveToDB" class="edu.uga.radiant.ajax.SaveToDB">
+		<result name="success" type="json"/>
+		<result name="input">/error.jsp</result>
+		<result name="error" type="json"/>
+	</action>
+	
+	<!-- export the sawsdl file -->
+	<action name="exportSawsdlFile" class="edu.uga.radiant.ajax.ExportSawsdlFile">
+		<result name="success" type="stream">
+			<param name="contentType">application/octet-stream</param>
+			<param name="inputName">fileInputStream</param>
+			<param name="contentDisposition">attachment;filename="${fileName}"</param>
+			<param name="bufferSize">1024</param>
+		</result>
+		<result name="login">/error.jsp</result> 
+		<result name="error">/error.jsp</result> 
+	</action>
+	
+</package>  
+</struts>

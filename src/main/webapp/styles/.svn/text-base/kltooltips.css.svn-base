@@ -1,0 +1,109 @@
+/*********************************
+ * Cascading Style Sheet: ToolTips.css Version 1.0
+ *
+ * Copyright (c) 2003, K&L Productions, All Rights Reserved.
+ *********************************/
+
+.hastitle
+  { border-bottom: double 3px #115;
+    cursor: help;
+  }
+
+.tooltip
+  { position:               absolute;
+    padding:                0.5em;
+    text-align:             justify;
+    font-size:              0.75em;
+    border:                 solid 1px #115;
+    background:             #c7d9ff;
+    display:                none;
+    z-index:                100;
+    max-width:              30em;
+  }
+
+.tttimes
+  { font-family:            "Times New Roman",serif;
+  }
+
+.ttlarge
+  { font-size:              1.2em;
+  }
+
+.ttitalicbold
+  { font-weight:            bold;
+    font-style:             italic;
+  }
+
+.ttred
+  { color:                  #a00;
+  }
+
+.ttklbg
+  { background: #fff url("../images/klw50.gif") no-repeat 0% 50% ;
+    min-height: 40px;
+    padding-left: 55px;
+  }
+
+.ttborder
+  { border: solid 6px #115;
+    border-left: solid 1px #115;
+    border-right: solid 1px #115;
+  }
+
+.ttsize
+  { width: 14em;
+  }
+
+
+#tooltipFrame
+  { position:               absolute;
+    padding:                0px;
+    width:                  25em;
+    border:                 double 3px #115;
+    background:             #ddf;
+    z-index:                100;
+    display:                none;
+  }
+
+#tooltipFrame h3
+  { background:             #33e;
+    color:                  #fff;
+    border-bottom:          solid 1px #000000;
+    margin:                 0px;
+    padding:                0.25em;
+    text-align:             center;
+    font-size:              0.9em;
+  }
+
+#tooltipContent
+  { font-size:              0.75em;
+    text-align:             justify;
+    margin:                 0px;
+    padding:                0.5em;
+  }
+
+#divttsample
+  { position:               absolute;
+    border:                 double 3px #115;
+    background:             #ddf;
+    padding:                0.25em;
+    font-size:              0.75em;
+    display:                none;
+    z-index:                100;
+    height:                 auto;
+    width:              25em;
+
+  }
+
+#divttsample ul
+  { display: block;
+    margin: 0.25em 0.25em 0.25em 2em;
+    padding: 0px;
+  }
+
+#divttsample li
+  { display: block;
+    margin: 0px;
+    list-style: none;
+    padding: 0px;
+  }

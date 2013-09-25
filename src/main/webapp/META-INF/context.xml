@@ -7,10 +7,10 @@
         url="jdbc:mysql://localhost:3306/radiant?useUnicode=true&amp;characterEncoding=UTF-8"
         maxActive="10" maxIdle="4" />
     
-    <!-- Specify HSQL JDBC datasource -->   
+    <!-- Specify Embedded HSQL JDBC datasource -->   
     <Resource name="jdbc/HSQLDB" auth="Container"
-        type="javax.sql.DataSource" username="sa" password=""
+        type="javax.sql.DataSource" username="SA" password=""
         driverClassName="org.hsqldb.jdbcDriver"
-        url="jdbc:hsqldb:hsql://localhost/radiant"
+        url="jdbc:hsqldb:file:${webroot}HSQLDB/radiant"
         maxActive="10" maxIdle="1" />
 </Context>

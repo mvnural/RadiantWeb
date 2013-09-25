@@ -5,6 +5,11 @@
     version="3.0">
   <display-name>DiscoveryWeb</display-name>
   <display-name>struts2test</display-name>
+  
+  <listener>
+    <listener-class>system.WebAppPropertiesListener</listener-class>
+  </listener>
+  
   <filter>
     <filter-name>sitemesh</filter-name>
     <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>

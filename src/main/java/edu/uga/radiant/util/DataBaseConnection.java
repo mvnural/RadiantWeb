@@ -17,6 +17,7 @@ public class DataBaseConnection {
 			InitialContext ctx = new InitialContext();
 			new RadiantToolConfig();
             DataSource ds = (DataSource)ctx.lookup(RadiantToolConfig.getEnv());
+            
 			conn = ds.getConnection();
 			
 		} catch (SQLException e) {

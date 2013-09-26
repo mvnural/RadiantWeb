@@ -515,7 +515,7 @@ $(function() {
 				<input type="hidden" name="page" value="wsdl" />
 				<input type="button" style='z-index:1;width:80px;height:24px;font-size:12px;' value="Browse" id="owlfilebutton" onclick="hitFileBtn('OWLFile');" >
 				<input type="submit" id="submit_owl_ajax" value="Load OWL" style="width:80px;" onclick="getTabIndex();" />
-				<input id="recommend-ontology" type="button" style='z-index:1; width:120px; height:24px; font-size:12px; opacity: 0;' value="Recommend Ontology" >
+<!-- 				<input id="recommend-ontology" type="button" style='z-index:1; width:120px; height:24px; font-size:12px; opacity: 0;' value="Recommend Ontology" > -->
 				<input type="file" style="display: none;" id="OWLFile" name="OWLFile" size="1" onchange="selectfile('OWLFile','owlloc')"/>
 				<input type="hidden" id="input-ontology-tab" name="tabIndex" value="0" />
 				<!-- ajax action for upload file or pass url -->

@@ -156,9 +156,9 @@
                     });
                 });
 	            var owlloc = document.getElementById("owlloc").value;
-	            if (owlloc == ''){
-	            	document.getElementById("recommend-ontology").style.opacity = 100;
-	            }
+//	            if (owlloc == ''){
+//	            	document.getElementById("recommend-ontology").style.opacity = 100;
+//	            }
 	            
 	            // set the droppable annotation tag 
 	            var dropArr = document.getElementsByName('ws-droppable');

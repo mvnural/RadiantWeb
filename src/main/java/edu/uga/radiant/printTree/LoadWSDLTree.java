@@ -41,7 +41,7 @@ public class LoadWSDLTree {
         		+ "<span id='save' style=\"color:white;background:#616D7E;padding:3px;margin-right:3px\" "
         		+ "class=\"ui-button ui-corner-all\" onclick=\"save();\" >Save WSDL</span>"
         		+ "<span id=\"recommend\" class=\"ui-button ui-corner-all\" "
-        		+ "style=\"color:white;background:#616D7E;padding:3px;margin-right:3px;\" onclick='recommendAll()'>Recommend Terms</span>"
+        		+ "style=\"color:white;background:#616D7E;padding:3px;margin-right:3px;\" onclick='recommendAll()'>Recommend All Terms</span>"
         		+ "<span id=\"switchWSView\" style=\"color:white;background:#616D7E;padding:3px;\" class=\"ui-button ui-corner-all\">WSDLXML view</span></div>");
         
     	buf.append("<div id=\"wsxmlview\" style=\"widh:100%; overflow:auto; \"></div>");

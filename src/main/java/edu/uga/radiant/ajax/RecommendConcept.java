@@ -128,7 +128,7 @@ public class RecommendConcept extends ActionSupport {
 				logger.debug("sug size = " + sug.size());
 				int tabidx = Integer.parseInt(tabIndex) + 1;
 				
-	        	buf.append("<p>Choose one concept for searching : (Owl" + tabidx + " classes)</p>");
+	        	buf.append("<p>Choose the best recommendation for this element : (Owl" + tabidx + " classes)</p>");
 	        	buf.append("<div style=\"overflow:auto;\">");
 	        	buf.append("<form name=\"recommend concept\" id=\"" + EleType + ":" + EleName + "\">");
 	        	

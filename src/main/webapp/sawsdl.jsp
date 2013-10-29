@@ -220,7 +220,7 @@
             buttons: {
                     "Save": function() {
                     	if (document.getElementById("savetoDB").checked){
-                    		ajaxHttpSend('savetoDB', 'updateWS', savetoDBProcess);
+                    		ajaxHttpSend('saveToDB', 'updateWS', savetoDBProcess);
                     	}
                     	if (document.getElementById("savetoFile").checked){
                     		var save = document.getElementById("getSawsdlFile");
@@ -465,9 +465,9 @@ $(function() {
         
         <div id="inputdescription" title="Input document">
 			<form>
-				<label for="name">concept description</label>
-				<textarea name="text" id="descriptionText" cols="45"; rows="10" style="resize: none" ></textarea><br/>
-				<label>click <b>search</b> to get recommend ontology concept</label>
+				<label for="name">Concept description from the web service descriptor</label>
+				<textarea name="text" id="descriptionText" cols="43"; rows="10" style="resize: none" ></textarea><br/>
+				<label>Click <b>search</b> to get recommendations from the ontology</label>
 			</form>
 		</div>
         

@@ -299,7 +299,7 @@ public class SimpleStringMatcher {
 					String contents = method.getResponseBodyAsString();
 					System.out.println(contents);
 					String[] lines = contents.split("\n");
-					double count = 5.0; // Counter for just returing top 5 results
+					double count = 5.0; // Counter for just returning top 5 results
 					for (String line : lines) {
 						// System.out.println(line);
 

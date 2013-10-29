@@ -43,7 +43,7 @@ public class LoadWADLTree {
                     + "<span id='save' style=\"color:white;background:#616D7E;padding:3px;margin-right:3px\" onclick=\"save();\" "
                     + "class=\"ui-button ui-corner-all\">Save WADL</span>"
                     + "<span id=\"recommend\" class=\"ui-button ui-corner-all\" "
-                    + "style=\"color:white;background:#616D7E;padding:3px;margin-right:3px;\" onclick='recommendTerms()'>Recommend Terms</span> "
+                    + "style=\"color:white;background:#616D7E;padding:3px;margin-right:3px;\" onclick='recommendAll()'>Recommend All Terms</span> "
                     + "<span id=\"switchWSView\" style=\"color:white;background:#616D7E;padding:3px;\" class=\"ui-button ui-corner-all\">WADLXML view</span></div>");
             
             buf.append("<div id=\"wsxmlview\" style=\"widh:100%; overflow: auto\"></div>");

@@ -340,7 +340,7 @@
 	/* Function to get recommend concept wsdl annotation by id
 	 */
 	function recommend(id, name, type, doc){
-		var answer = confirm("recommend this annotation ?");
+		var answer = confirm("Get recommendations for this annotation ?");
 		if (answer){
 			
 			// check the active tab
@@ -440,7 +440,7 @@
 	/* Function to get all recommend concept wsdl annotation
 	 */
 	function recommendAll(){
-		var answer = confirm("recommend all term ?");
+		var answer = confirm("recommend all terms ?");
 		if (answer){
 			
 			// check the active tab

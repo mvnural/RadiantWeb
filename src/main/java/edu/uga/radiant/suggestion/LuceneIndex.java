@@ -107,11 +107,11 @@ public class LuceneIndex {
 		}
 	}
 	
-	public ArrayList<SuggestionOBJ> getMatchClass(String quertString, int rankNum, String field) throws ParseException, CorruptIndexException, IOException, URISyntaxException{
+	public ArrayList<SuggestionOBJ> getMatchClass(String queryString, int rankNum, String field) throws ParseException, CorruptIndexException, IOException, URISyntaxException{
 		ArrayList<SuggestionOBJ> results = new ArrayList<SuggestionOBJ>();
-		if (quertString == null || quertString.equals("")) return null;
-		quertString = replaceChar(quertString);
-		Query q = new QueryParser(Version.LUCENE_35, field, analyzer).parse(quertString);
+		if (queryString == null || queryString.equals("")) return null;
+		queryString = replaceChar(queryString);
+		Query q = new QueryParser(Version.LUCENE_35, field, analyzer).parse(queryString);
 		int TopRank = rankNum;
 		IndexSearcher searcher = new IndexSearcher(IndexReader.open(index));
 		TopScoreDocCollector collector = TopScoreDocCollector.create(TopRank, true);

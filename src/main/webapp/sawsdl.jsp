@@ -307,35 +307,35 @@
     <link rel="stylesheet" media="screen" type="text/css" href="./styles/kltooltips.css" />
     <link rel="stylesheet" media="screen" type="text/css" href="./styles/example.css" />
     
-    <script type="text/javascript" src="./scripts_new/tabber.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.hotkeys.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.cookie.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.jstree.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.ui.core.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.ui.widget.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.ui.mouse.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.ui.button.js"></script>       
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.ui.draggable.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.ui.droppable.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.treeview.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.ui.progressbar.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.fixedMenu.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.ui.selectable.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.effects.core.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.effects.clip.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.ui.position.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.ui.resizable.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.ui.dialog.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.tinyscrollbar.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/jquery.scrollTo.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/AjaxSearch.js"></script>
-    <script type="text/javascript" language="javascript" src="./scripts_new/kltooltips.evaluation.js"></script>
-	<script type="text/javascript" language="javascript" src="./scripts_new/jquery.ui.autocomplete.js"></script>
+    <script type="text/javascript" src="./js/plugins/tabber.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.hotkeys.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.cookie.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.jstree.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.core.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.widget.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.mouse.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.button.js"></script>       
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.draggable.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.droppable.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.treeview.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.progressbar.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.fixedMenu.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.selectable.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.effects.core.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.effects.clip.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.position.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.resizable.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.dialog.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.tinyscrollbar.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.scrollTo.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/AjaxSearch.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/kltooltips.evaluation.js"></script>
+	<script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.autocomplete.js"></script>
 	
-	<script type="text/javascript" language="javascript" src="./script/radiant.js"></script>
-	<script type="text/javascript" language="javascript" src="./script/ontology.js"></script>
-	<script type="text/javascript" language="javascript" src="./script/treeviewAction.js"></script>
-	<script type="text/javascript" language="javascript" src="./script/wsdl.js"></script>
+	<script type="text/javascript" language="javascript" src="./js/radiantweb/radiant.js"></script>
+	<script type="text/javascript" language="javascript" src="./js/radiantweb/ontology.js"></script>
+	<script type="text/javascript" language="javascript" src="./js/radiantweb/treeviewAction.js"></script>
+	<script type="text/javascript" language="javascript" src="./js/radiantweb/wsdl.js"></script>
 	
 	<link rel="stylesheet" href="./styles/jquery-ui/base/jquery.ui.all.css">
     <link rel="stylesheet" href="./styles/default.css">

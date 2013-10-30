@@ -25,7 +25,7 @@
       <div class="but"><a href="<%=request.getContextPath()%>/sawsdl.jsp" title="">Annotation</a></div>
       <div class="but"><a href="<%=request.getContextPath()%>/discovery.jsp" title="">Discovery</a></div>
       <% if (login != null){ %>
-      	<div class="but"><a href="/<%=request.getContextPath()%>/myPage.jsp" title="">MyPage</a></div>
+      	<div class="but"><a href="<%=request.getContextPath()%>/myPage.jsp" title="">MyPage</a></div>
       <% } %>
       <div class="but"><a href="#" title="">Contact us</a></div>
     </div>

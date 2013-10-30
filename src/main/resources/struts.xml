@@ -5,7 +5,7 @@
 <struts>
 <constant name="struts.i18n.encoding" value="UTF-8"></constant>
 <constant name="struts.multipart.maxSize" value="10000000"></constant>
-<package name="struts2test" extends="struts-default">
+<package name="main" extends="struts-default">
 <!-- set up Action class to deal with the jsp of success and error-->
 	
 	<!-- Discover the appropriate operation  -->
@@ -52,7 +52,7 @@
 	
 </package>
 
-<package name="example"  extends="json-default">  
+<package name="ajax"  extends="json-default">  
 	
 	<!-- get the OWL file treeview(HTML) -->
 	<action name="loadOWL" class="edu.uga.radiant.ajax.LoadOWL">

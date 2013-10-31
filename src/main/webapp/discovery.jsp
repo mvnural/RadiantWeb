@@ -522,8 +522,7 @@ function addOutputElement() {
     <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.dialog.js"></script>
     <script type="text/javascript" language="javascript" src="./js/plugins/jquery.tinyscrollbar.js"></script>
     <script type="text/javascript" language="javascript" src="./js/plugins/jquery.scrollTo.js"></script>
-    <script type="text/javascript" language="javascript" src="./js/plugins/kltooltips.evaluation.js"></script>
-	<script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.autocomplete.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.autocomplete.js"></script>
 	
 	<script type="text/javascript" language="javascript" src="./js/radiantweb/radiant.js"></script>
 	<script type="text/javascript" language="javascript" src="./js/radiantweb/ontology.js"></script>

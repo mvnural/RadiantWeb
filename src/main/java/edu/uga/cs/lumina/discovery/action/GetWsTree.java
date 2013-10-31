@@ -31,12 +31,12 @@ public class GetWsTree extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * the link inforamtion of wsdl
+	 * the link information of wsdl
 	 */
 	private ArrayList<URLlink> wsdls;
 	
 	/**
-	 * the link inforamtion of sawsdl
+	 * the link information of sawsdl
 	 */
 	private ArrayList<URLlink> sawsdls;
 	

@@ -328,8 +328,6 @@
     <script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.dialog.js"></script>
     <script type="text/javascript" language="javascript" src="./js/plugins/jquery.tinyscrollbar.js"></script>
     <script type="text/javascript" language="javascript" src="./js/plugins/jquery.scrollTo.js"></script>
-    <script type="text/javascript" language="javascript" src="./js/plugins/AjaxSearch.js"></script>
-    <script type="text/javascript" language="javascript" src="./js/plugins/kltooltips.evaluation.js"></script>
 	<script type="text/javascript" language="javascript" src="./js/plugins/jquery.ui.autocomplete.js"></script>
 	
 	<script type="text/javascript" language="javascript" src="./js/radiantweb/radiant.js"></script>
@@ -352,7 +350,7 @@ $(function() {
 	jQuery.ajaxSetup ({
 		cache: false
 	});
-	jQuery.struts2_jquery.require("js/struts2/jquery.ui.struts2-3.3.0.min.js");
+	//jQuery.struts2_jquery.require("js/struts2/jquery.ui.struts2-3.3.0.min.js");
 });
 </script>
        

@@ -33,6 +33,7 @@
 <!-- header ends -->
     <!-- content begins -->
 	<div id="content">
+	
 		<sitemesh:write property='body'/> 
         <div style="clear: both"><img src="images/spaser.gif" alt="" width="1" height="1" /></div>             
         <div style="clear: both"><img src="images/spaser.gif" alt="" width="1" height="1" /></div>

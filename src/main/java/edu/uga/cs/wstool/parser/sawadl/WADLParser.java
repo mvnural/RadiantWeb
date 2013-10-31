@@ -63,6 +63,7 @@ public class WADLParser extends XMLParser
     private static Namespace wadlNamespace;
     private Application application;
     private Map<String, Resource> resources;
+    //TODO Fix this namespace
     private static Namespace SAWADLNamespace = Namespace.getNamespace("sawadl", "http://cs.uga.edu/~guttula/sawadl.xsd");
     
     

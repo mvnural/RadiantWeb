@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Any page except Annotation and Discovery will be decorated 
+	 with main.jsp so that the menus etc. are included.  
+-->
 <sitemesh>
     <mapping path="/*" decorator="/main.jsp"/>
-    <mapping path="/sawsdl.jsp" exclue="true"/>
-	<mapping path="/discovery.jsp" exclue="true"/>
-	<mapping path="/Discovery.action" exclue="true"/>
+    <mapping path="/sawsdl.jsp" exclude="true"/>
+	<mapping path="/discovery.jsp" exclude="true"/>
+	<mapping path="/Discovery.action" exclude="true"/>
 </sitemesh>

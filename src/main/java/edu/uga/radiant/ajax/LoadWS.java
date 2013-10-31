@@ -101,7 +101,7 @@ public class LoadWS extends ActionSupport {
 	        }
 			
 			if (wsParser == null){
-				errormsg = "WSDL is invalidate";
+				errormsg = "Web service document is invalid";
 				return ERROR;
 			}
 			
@@ -131,7 +131,7 @@ public class LoadWS extends ActionSupport {
 	            type = "wsdl";
 	        }
 	        else if(isWADL(doc)){
-	        	// not implement yet
+	        	// not implemented yet
 	        	LoadWADLTree.loadWADL((WADLParser) wsParser, buf, wsloc);
 	        	innerTreeHtml = buf.toString();
 	        	type = "wadl";

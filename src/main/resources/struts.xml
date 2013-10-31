@@ -120,7 +120,7 @@
 	<!-- save the web service file to database -->
 	<action name="saveToDB" class="edu.uga.radiant.ajax.SaveToDB">
 		<result name="success" type="json"/>
-		<result name="input">/error.jsp</result>
+<!-- 		<result name="input">/error.jsp</result> -->
 		<result name="error" type="json"/>
 	</action>
 	

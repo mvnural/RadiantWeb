@@ -247,6 +247,7 @@
 	 */
 	function savetoDBProcess(responseText){
 		try{
+			
 			var response = eval("(" + responseText + ")");
 			var errormsg = response.errormsg;
 			//alert(errormsg);
@@ -255,6 +256,7 @@
 			}else{
 				alert(errormsg);
 			}
+			
 		}catch(err){
 			 alert("connection fails");
 		}
@@ -509,8 +511,8 @@
 		                	var content = obj.innerHTML;
 		                	if (id != 0){
 		                		obj.innerHTML = content + '<div id="' + divId + '" name="' + divName + '" style="margin:10px" ><span class="suggested hove ui-widget-content ui-corner-all" onclick="openOWLNode(\'' + owlid + '\')"><b>' + label + '</b></span>' + 
-								'<span id="approve11" class="hove ui-icon ui-icon-circle-check" style="float:left" onclick="approve(' + id + ', \'' + name + '\',\'' + type + '\' ,\'' + iri + '\', \'' + divId + '\')"></span>' + 
-								'<span id="reject11" class="hove ui-icon ui-icon-circle-close" onclick="reject(\'' + divId + '\')" style="float:left"></span></div>' ;
+								'<span id="approve11" class="approve-button hove ui-icon ui-icon-circle-check" style="float:left" onclick="approve(' + id + ', \'' + name + '\',\'' + type + '\' ,\'' + iri + '\', \'' + divId + '\')"></span>' + 
+								'<span id="reject11" class="reject-button hove ui-icon ui-icon-circle-close" onclick="reject(\'' + divId + '\')" style="float:left"></span></div>' ;
 		                	}else{
 		                		obj.innerHTML = content + '<div id="' + divId + '" name="' + divName + '" style="margin:10px" ><span class="annotated ui-widget-content ui-corner-all hove" onclick="openOWLNode(\'' + owlid + '\')"><b>' + label + '</b></span>' + 
 								'<span class="hove ui-icon ui-icon-close" style="float:left" onclick="removeElement(\'wadl\', \'' + name + '\', \'' + type + '\', \'' + attr  + '\' , \'' + iri + '\', \'' + divId + '\');"><b> X </b></span></div>' ;
@@ -562,3 +564,12 @@
 	        removeTagParent.removeChild(obj);
 		}
 	}
+	
+	function removeUnapproved(){
+		window.old_alert = window.alert;
+		window.alert = function(){}
+		$(".reject-button").each(function(){
+			$ (this).parent().remove();
+		});
+		
+	}	

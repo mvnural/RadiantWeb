@@ -41,13 +41,19 @@
 	<!-- login action -->
 	<action name="login" class="edu.uga.cs.radiant.struts2.action.Login">
 		<result name="error">/error.jsp</result>
-		<result name="success">/myPage.jsp</result>
+		<result name="success" type="redirectAction">listUserServices</result>
 	</action>
 	
 	<!-- logout action -->
 	<action name="logout" class="edu.uga.cs.radiant.struts2.action.Logout">
 		<result name="error">/error.jsp</result>
 		<result name="success">/index.jsp</result>
+	</action>
+	
+	<!-- Get user services -->
+	<action name="listUserServices" class="edu.uga.cs.radiant.struts2.action.ListUserServices">
+		<result name="error">/index.jsp</result>
+		<result name="success">/myPage.jsp</result>
 	</action>
 	
 </package>

@@ -1,6 +1,7 @@
-package edu.uga.radiant.ajax;
+package edu.uga.cs.radiant.struts2.action;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -15,7 +16,7 @@ import edu.uga.radiant.util.DataManager;
 import edu.uga.radiant.util.QueryManager;
 import edu.uga.radiant.util.RadiantToolConfig;
 
-public class SaveToDB extends ActionSupport {
+public class ListUserServices extends ActionSupport {
 
 	/**
 	 * 
@@ -23,36 +24,26 @@ public class SaveToDB extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	private String errormsg;
+	private List<Service> userServices;
 	
 	
 	public String execute() {
 		
 		errormsg = "";
-		DataBaseConnection dbcn = new DataBaseConnection();
-		Connection conn = dbcn.getConnection();
+
 		
 		@SuppressWarnings("rawtypes")
 		Map session = ActionContext.getContext().getSession();
-		SAWSDLParser wsparser = (SAWSDLParser)session.get("wsdlparser");
-		String filename = (String) session.get("wsname");
+		if(session.get("login") == null || !session.get("login").equals("true")){
+			errormsg = "User not logged in.";
+			return ERROR;
+		}
 		int userId = (Integer) session.get("userID");
 		
 		
 		try {
 			
-			String xml = wsparser.updateToXml();
-			String md5 = WSDLSystem.generateMD5(xml);
-			
-			//if (filename.split(".").length > 1) name = filename.split(".")[0];
-			
-			String oldMD5 = QueryManager.getMD5(filename);
-			//Web service has not been saved to the DB before
-			if (oldMD5.equals("")){
-				QueryManager.insertService(filename, xml, md5, userId);
-			//Web service exists but modified since last save
-			}else if (!oldMD5.equals(md5)){
-				QueryManager.updateService(filename, xml, md5);
-			}
+			userServices = QueryManager.getUserServices(userId);
 			
 			return SUCCESS; 
 			
@@ -64,6 +55,14 @@ public class SaveToDB extends ActionSupport {
 			logger.error(e.toString());
 			return ERROR;
 		}
+	}
+
+	public List<Service> getUserServices() {
+		return userServices;
+	}
+
+	public void setUserServices(List<Service> userServices) {
+		this.userServices = userServices;
 	}
 
 	public void setErrormsg(String errormsg) {

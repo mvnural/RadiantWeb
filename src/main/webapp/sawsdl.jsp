@@ -19,7 +19,7 @@
 <title>Radiant Web Service Annotation Tool</title>
 <script type="text/javascript">
 	
-	//It fefines the functions that would be called when wadl_form and owl_form are submitted.
+	//It defines the functions that would be called when wadl_form and owl_form are submitted.
     //It basically assigns the actions of the form to target of 2 hidden frames in the page, due to which the file
     //can be uploaded to the server without (apparent) page refresh; as there seems to be no straight forward way for an
     //ajaxed file upload; The targets for the forms that is uploadOWL.jsp and uploadWADL.jsp have the logic for uploading the respective files to the server.
@@ -226,6 +226,7 @@
                     		var save = document.getElementById("getSawsdlFile");
                         	simulateClick(save, "click");
                     	}
+                    	$( this ).dialog( "close" );
                     },
                     Cancel: function() {
                     	$( this ).dialog( "close" );
@@ -255,9 +256,11 @@
             close: function() {
             }
         });
-
+    
     }
     window.onload=init;
+    
+    
 
 </script>
         
@@ -294,6 +297,17 @@
 			}
 		}
 	}
+	
+	function urlParam(name){
+        	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        	if(results != null){
+        		return results[1] || null;
+			}else{
+				return null;
+			}
+		
+    }
+	
     
 </script>
 
@@ -406,10 +420,14 @@ $(function() {
 </head>
 
 <body>
+<script type="text/javascript">
+
+
+</script>
 <input id="refreshAlert" type="hidden" value="true" />
 <input id="OntologyTabIndex" type="hidden" value="0" />
 <div id="main" style="width:98%; height:auto">
-	<div style="float:right;"><a href="index.jsp" style="font-size: 150%;">Home</a></div>
+	<div style="float:left;"><a href="listUserServices.action" style="font-size: 150%;">Go Back to Home</a></div>
 	<div style="width:100%; height:50px; text-align:center; vertical-align:middle; border-bottom: 1px solid #C5C5C5" >
         <h1><i>Radiant Web - Semantic Annotation Tool</i></h1>
     </div>
@@ -425,8 +443,9 @@ $(function() {
 					WSDL location <input type="text" id="wsloc" name="wsloc" size="50" >
 				</div>
 				<input type="button" style='z-index:1;width:80px;height:24px;font-size:12px;' value="Browse" id="owlfilebutton" onclick="hitFileBtn('WSFile');">
-				<input type="submit" id="submit_ws_ajax" value="Load WS" style="width:80px;"/>
+				<input type="submit" id="submit_ws_ajax" value="Load Web Service" style="width: 118px;height: 24px;"/>
 				<input type="file" style="display: none;" id="WSFile" name="WSFile" size="1" onchange="selectfile('WSFile','wsloc')"/>
+				<span><a id="sample_ws" href="#">Load sample Web Service</a></span>
 				<!-- ajax action for upload file or pass url -->
 				<script type='text/javascript'>
 					jQuery(document).ready(function () { 
@@ -439,6 +458,16 @@ $(function() {
 						options_submit_ajax.href = "#";
 						options_submit_ajax.formids = "wsdl_form";	// submit form id
 						jQuery.struts2_jquery.bind(jQuery('#submit_ws_ajax'),options_submit_ajax);
+						
+						if(urlParam('name') !=null){
+							$("#wsloc").val("db:" +decodeURIComponent(urlParam('name')));
+							simulateClick(submit_ws_ajax, "click");
+						}
+						
+						$("#sample_ws").click(function() {
+							$("#wsloc").val("http://www.ebi.ac.uk/Tools/services/soap/wublast?wsdl");
+							simulateClick(submit_ws_ajax, "click");
+						});
 					});  
 				</script>
 			</s:form>
@@ -512,10 +541,11 @@ $(function() {
 				</div>
 				<input type="hidden" name="page" value="wsdl" />
 				<input type="button" style='z-index:1;width:80px;height:24px;font-size:12px;' value="Browse" id="owlfilebutton" onclick="hitFileBtn('OWLFile');" >
-				<input type="submit" id="submit_owl_ajax" value="Load OWL" style="width:80px;" onclick="getTabIndex();" />
+				<input type="submit" id="submit_owl_ajax" value="Load OWL" style="width:80px;height:24px;" onclick="getTabIndex();" />
 <!-- 				<input id="recommend-ontology" type="button" style='z-index:1; width:120px; height:24px; font-size:12px; opacity: 0;' value="Recommend Ontology" > -->
 				<input type="file" style="display: none;" id="OWLFile" name="OWLFile" size="1" onchange="selectfile('OWLFile','owlloc')"/>
 				<input type="hidden" id="input-ontology-tab" name="tabIndex" value="0" />
+				<span><a id="sample_owl" href="#">Load Sample Ontology</a></span>
 				<!-- ajax action for upload file or pass url -->
 				<script type='text/javascript'>
 					jQuery(document).ready(function () { 
@@ -529,6 +559,12 @@ $(function() {
 						options_submit_ajax.formids = "owl_form";	// submit form id
 						
 						jQuery.struts2_jquery.bind(jQuery('#submit_owl_ajax'),options_submit_ajax);
+						
+						$("#sample_owl").click(function() {
+							$("#owlloc").val("http://purl.obolibrary.org/obo/obi/webService.owl");
+							simulateClick(submit_owl_ajax, "click");
+						});
+						
 					});  
 				</script>
 			</s:form>
@@ -553,8 +589,6 @@ $(function() {
         
         <div id="owltabs" class="tabber" style="padding:2px;">
             <div id="owl1" class='tabbertab' style="height:395px; overflow: auto"><h2>Ontology 1</h2></div>
-        	<div id="owl2" class='tabbertab' style="height:395px; overflow: auto"><h2>Ontology 2</h2></div>
-        	<div id="owl3" class='tabbertab' style="height:395px; overflow: auto"><h2>Ontology 3</h2></div>
         </div>
             
         <div id="importErrorDialog" title="Import Error">

@@ -7,8 +7,20 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="styles/main.css" rel="stylesheet" type="text/css" />
+
+
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#guestAccount").click(function(){
+		$("#text1").attr("value","guest");
+		$("#text2").attr("value","guestPass");
+	});	
+	
+});
+
+</script>
 	<div id="right">
 		<div id="log">
 			<div>
@@ -45,23 +57,20 @@
 					</s:iterator>
 					<table>
 						<tr>
-							<td width="120px"><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="/Radiant/createAccount.jsp">Create account</a></td>
-							<td><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="/Radiant/forgotpass.jsp">Forgot password</a></td>
+							<td><a id="guestAccount" href="#"><h2>Use guest account</h2></a></td>
 						</tr>
 					</table>
 				</s:if> 
 			</div>
 		</div>
 		<br />
-		<h1>Recent News</h1>
+		<h1>More Info</h1>
 		<div class="tit_bot">
-			<div class="right_b"><span class="col_b">Related Publications  </span><br />
-				<a href="ChaitanyaThesis.pdf">RadiantWeb: A Tool Facilitating Semantic Annotation of Web Services,</a> <br />Masters Thesis (M.S. in CS Degree) May 2012. 
+			<div class="right_b"><span class="col_b">RadiantWeb</span><br />
+				<a href="http://mango.ctegd.uga.edu/jkissingLab/SWS/RadiantWeb/index.html">RadiantWeb documentation </a> <br /> 
 			</div>
 			<hr />
-			<div class="right_b"><span class="col_b">available space </span><br />
-				news message ... </div>
-			<div class="more"><a href="#"><img src="images/b_more.gif" alt="" /></a></div>
+
 		</div>   
 	</div>  
     <div id="left">

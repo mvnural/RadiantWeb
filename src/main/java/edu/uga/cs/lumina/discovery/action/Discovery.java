@@ -22,7 +22,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import edu.uga.cs.lumina.discovery.util.DiscoveryManager;
-import edu.uga.cs.lumina.discovery.util.ErrorMesg;
+import edu.uga.cs.lumina.discovery.util.ErrorMessage;
 import edu.uga.cs.lumina.discovery.util.OperationInfo;
 import edu.uga.cs.lumina.discovery.util.WsOpReader;
 import edu.uga.cs.wstool.parser.sawsdl.ComplexTypeOBJ;
@@ -126,12 +126,12 @@ public class Discovery extends ActionSupport {
 	/**
 	 * the out print vector which collect the error message
 	 */
-	private Vector<ErrorMesg> vecError;
+	private Vector<ErrorMessage> vecError;
 	
 	/**
 	 * the out print value which mean the error message
 	 */
-	private ErrorMesg errorMesg;
+	private ErrorMessage errorMesg;
 	
 	/**
 	 * the outcome operation information which show the sawasdl file result
@@ -200,7 +200,7 @@ public class Discovery extends ActionSupport {
 			HashMap<String, HashMap<String, Double>> WSDLResult = new HashMap<String, HashMap<String, Double>>();
 			
 			// Catch the error message then return to the website
-			vecError = new Vector<ErrorMesg>();
+			vecError = new Vector<ErrorMessage>();
 			
 			// get the request operation number, it should be "1" now
 			int operationNum = 1;
@@ -308,7 +308,7 @@ public class Discovery extends ActionSupport {
 			}else if (!owlloc.equals("")){
 				owlIRI = baseURI + "XMLBox/OWLBox/" + owlloc;
 			}else{
-			    errorMesg = new ErrorMesg();
+			    errorMesg = new ErrorMessage();
                 errorMesg.setErrormessage("Please import owl file first");
                 vecError.add(errorMesg);
                 return ERROR;
@@ -323,7 +323,7 @@ public class Discovery extends ActionSupport {
 					discoveryMgr = OntologyManager.getInstance(owlIRI);
 				}catch(Exception e){
 					e.printStackTrace();
-					errorMesg = new ErrorMesg();
+					errorMesg = new ErrorMessage();
 					errorMesg.setErrormessage("Can not load owl file ");
 					vecError.add(errorMesg);
 					
@@ -499,7 +499,7 @@ public class Discovery extends ActionSupport {
 		
 		} catch (Exception e) {
 			e.printStackTrace();
-			errorMesg = new ErrorMesg();
+			errorMesg = new ErrorMessage();
 			errorMesg.setErrormessage(e.toString());
 			vecError.add(errorMesg);
 			
@@ -548,11 +548,11 @@ public class Discovery extends ActionSupport {
 		return operationConcept;
 	}
 
-	public void setVecError(Vector<ErrorMesg> vecError) {
+	public void setVecError(Vector<ErrorMessage> vecError) {
 		this.vecError = vecError;
 	}
 
-	public Vector<ErrorMesg> getVecError() {
+	public Vector<ErrorMessage> getVecError() {
 		return vecError;
 	}
 

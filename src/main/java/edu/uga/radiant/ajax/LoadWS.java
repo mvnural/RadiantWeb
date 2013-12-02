@@ -1,6 +1,7 @@
 package edu.uga.radiant.ajax;
 
 import java.io.File;
+import java.io.StringReader;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import edu.uga.cs.wstool.parser.sawsdl.SAWSDLParser;
 import edu.uga.cs.wstool.parser.xml.XMLParser;
 import edu.uga.radiant.printTree.LoadWADLTree;
 import edu.uga.radiant.printTree.LoadWSDLTree;
+import edu.uga.radiant.util.QueryManager;
 import edu.uga.radiant.util.RadiantToolConfig;
 
 public class LoadWS extends ActionSupport {
@@ -59,38 +61,52 @@ public class LoadWS extends ActionSupport {
 			session.remove("wsname");
 			session.remove("wsdlparser");
 			session.remove("wadlparser");
+			//If it is a remote file
 			if (wsloc.indexOf("http:") != -1){	
 	        	importURL = wsloc;
-	        	if (wsloc.equalsIgnoreCase(wsdlExt) || wsloc.equalsIgnoreCase(sawsdlExt)){
-	        		doc = sbuilder.build(importURL);
+        		doc = sbuilder.build(importURL);
+	        	if (isWSDL(doc)){
 					wsParser = new SAWSDLParser(doc);
 		        	session.put("wsdlparser", wsParser);
 		        	session.remove("wadlparser");
-		        	int start = importURL.lastIndexOf("/");
-		        	filename = importURL.substring(start, importURL.length());
-		        	session.put("wsname", filename);
-	        	}else if (wsloc.equalsIgnoreCase(wadlExt) || wsloc.equalsIgnoreCase(sawadlExt)){
-	        		doc = sbuilder.build(importURL);
+		        	
+	        	}else if (isWADL(doc)){
 					wsParser = new WADLParser(doc);
 		        	session.put("wadlparser", wsParser);
 		        	session.remove("wsdlparser");
-		        	int start = importURL.lastIndexOf("/");
-		        	filename = importURL.substring(start, importURL.length());
-		        	session.put("wsname", filename);
+
 	        	}
+	        	int start = importURL.lastIndexOf("/");
+	        	filename = importURL.substring(start, importURL.length());
+	        	filename = QueryManager.getUniqueFileName(filename);
+	        	session.put("wsname", filename);
+        	// The document is being fetched from the database
+			}else if(wsloc.startsWith("db:")){
+				filename = wsloc.substring(3); 
+				String documentXml = QueryManager.getServiceXml(filename);
+				doc = sbuilder.build(new StringReader(documentXml));
+				if(isWSDL(doc)){
+					wsParser = new SAWSDLParser(doc);
+	    			session.put("wsdlparser", wsParser);
+				}else{
+					wsParser = new WADLParser(doc);
+    	        	session.put("wadlparser", wsParser);
+				}
+    			
+	        	session.put("wsname", filename);
+				
+			// Document is being uploaded from computer
 			}else{
 	        	if (WSFile != null){
-	        		if (wsloc.endsWith(wsdlExt) || wsloc.endsWith(sawsdlExt)){
-	        			doc = sbuilder.build(WSFile);
+	        		filename = QueryManager.getUniqueFileName(wsloc);
+	        		doc = sbuilder.build(WSFile);
+	        		if (isWSDL(doc)){
 	        			wsParser = new SAWSDLParser(doc);
 	    	        	session.put("wsdlparser", wsParser);
-	    	        	filename = wsloc;
 	    	        	session.put("wsname", filename);
-	    		    }else if (wsloc.endsWith(wadlExt) || wsloc.endsWith(sawadlExt)){
-	    		    	doc = sbuilder.build(WSFile);
+	    		    }else if (isWADL(doc)){
 	        			wsParser = new WADLParser(doc);
 	    	        	session.put("wadlparser", wsParser);
-	    	        	filename = wsloc;
 	    	        	session.put("wsname", filename);
 	    		    }else{
 	        			errormsg = "File is not wsdl or wadl file.";
@@ -125,7 +141,7 @@ public class LoadWS extends ActionSupport {
 	            if(wsdlV1 == true){
 	            	LoadWSDLTree.loadWSDL((SAWSDLParser) wsParser, buf, filename);   
 	            }else{
-	            	// not implement yet
+	            	// not implemented yet
 	            }
 	            innerTreeHtml = buf.toString();
 	            type = "wsdl";

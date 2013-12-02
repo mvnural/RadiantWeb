@@ -2,28 +2,29 @@ package edu.uga.cs.lumina.discovery.util;
 
 /**
  * @author Long
+ * @author Mustafa Nural 
  * 
- * This class is used to define the error message
+ * This class is used to define an error message.
  * 
  */
-public class ErrorMesg {
+public class ErrorMessage {
 	
 	/**
 	 * the error message
 	 */
-	private String errormessage;
+	private String errorMessage;
 
 	/**
 	 * @return error message
 	 */
 	public String getErrormessage() {
-		return errormessage;
+		return errorMessage;
 	}
 
 	/**
 	 * @param errormessage the error message
 	 */
 	public void setErrormessage(String errormessage) {
-		this.errormessage = errormessage;
+		this.errorMessage = errormessage;
 	}
 }

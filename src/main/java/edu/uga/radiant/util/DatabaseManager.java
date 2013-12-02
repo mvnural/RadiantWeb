@@ -46,7 +46,7 @@ public class DatabaseManager {
             e.printStackTrace();
         }
 
-    } // constructor
+    } // constrlsuctor
     
     /**
      * get database connection from properties 
@@ -272,7 +272,19 @@ public class DatabaseManager {
      * @throws SQLException
      */
     public static void main(String[] args) throws SQLException {
-        
+    	 String             sql = "CREATE TABLE service ( " +
+                 "id int(11) NOT NULL AUTO_INCREMENT, " +
+                 "name varchar(50) NOT NULL, " +
+                 "description varchar(3000) DEFAULT NULL, " +
+                 "url varchar(100) NOT NULL, " +
+                 "provider int NOT NULL, " +
+                 "PRIMARY KEY (id), " +
+                 "CONSTRAINT service_unique_name UNIQUE (name), " +
+                 "CONSTRAINT FK_service_provider FOREIGN KEY (provider) REFERENCES user (id) ON DELETE NO ACTION ON UPDATE NO ACTION " +
+                 ");";
+             System.out.println(sql);
+    	System.exit(0);
+    	
         DatabaseManager mgr = new DatabaseManager();
         
         if (args != null && args.length == 2){

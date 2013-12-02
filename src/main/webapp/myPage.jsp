@@ -54,15 +54,19 @@
 		</div> 
 	</div>  
 	<div id="left">
-    	<h2>My Service</h2>
+    	<h3><a href="sawsdl.jsp">Start a new annnotation</a></h3>
+    	<h2>My Services</h2>
+    	<table>
+    	<s:iterator value="userServices">
+       		<tr>
+       			<td><strong>Name:</strong><p><s:property value="name"/></p></td><td><s:property value="description"/></td><td><a href="sawsdl.jsp?name=<s:property value="name"/>">Load</a></td>	
+       		</tr>
+       	</s:iterator>
+       	</table> 		
 	</div>
     <div id="center">
-    	<h2>My Service List</h2>
-       	<table>
-       		<tr>
-       			
-       		</tr>
-       	</table> 		
+    	
+       	
     </div>
 </body>
 </html>

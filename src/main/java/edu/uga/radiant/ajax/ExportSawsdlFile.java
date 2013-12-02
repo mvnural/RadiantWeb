@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-import edu.uga.cs.lumina.discovery.util.ErrorMesg;
+import edu.uga.cs.lumina.discovery.util.ErrorMessage;
 import edu.uga.cs.wstool.parser.sawadl.WADLParser;
 import edu.uga.cs.wstool.parser.sawsdl.SAWSDLParser;
 import edu.uga.cs.wstool.parser.xml.XMLParser;
@@ -31,11 +31,11 @@ public class ExportSawsdlFile extends ActionSupport{
 	
 	/** response error message
      */
-	private ErrorMesg errorMesg;
+	private ErrorMessage errorMesg;
 	
 	/** response error vector
      */
-	private Vector<ErrorMesg> vecError;
+	private Vector<ErrorMessage> vecError;
 	
 	/** response message type(ex. success, error)
      */
@@ -74,9 +74,9 @@ public class ExportSawsdlFile extends ActionSupport{
 		}
 		
 		if (wsparser == null){
-			errorMesg = new ErrorMesg();
+			errorMesg = new ErrorMessage();
 			errorMesg.setErrormessage("The session is expired. please login again!");
-			vecError = new Vector<ErrorMesg>();
+			vecError = new Vector<ErrorMessage>();
 			vecError.add(errorMesg);
 			return ERROR;
 		}
@@ -90,9 +90,9 @@ public class ExportSawsdlFile extends ActionSupport{
 		} catch (Exception e) {
 			e.printStackTrace();
 			//put error message into vecError show on error.jsp
-			errorMesg = new ErrorMesg();
+			errorMesg = new ErrorMessage();
 			errorMesg.setErrormessage(e.toString());
-			vecError = new Vector<ErrorMesg>();
+			vecError = new Vector<ErrorMessage>();
 			vecError.add(errorMesg);
 			
 			// record error log
@@ -108,11 +108,11 @@ public class ExportSawsdlFile extends ActionSupport{
 		return fileInputStream;
 	}
 
-	public void setVecError(Vector<ErrorMesg> vecError) {
+	public void setVecError(Vector<ErrorMessage> vecError) {
 		this.vecError = vecError;
 	}
 
-	public Vector<ErrorMesg> getVecError() {
+	public Vector<ErrorMessage> getVecError() {
 		return vecError;
 	}
 

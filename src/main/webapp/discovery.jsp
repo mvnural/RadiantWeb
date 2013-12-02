@@ -589,7 +589,7 @@ $(function() {
 
 <body>
 <div id="main" style="width:98%; height:auto">
-	<div style="float:right;"><a href="index.jsp" style="font-size: 150%;">Home</a></div>
+	<div style="float:left;"><a href="myPage.jsp" style="font-size: 150%;"> Go Back to Home</a></div>
     <div style="width:100%; height:50px; text-align:center; vertical-align:middle; border-bottom: 1px solid #C5C5C5" >
         <h1><i>Radiant Web - Semantic Discovery Tool</i></h1>
     </div>

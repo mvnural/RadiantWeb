@@ -48,7 +48,7 @@ public class Login extends ActionSupport{
 		loginError = new Vector<String>();
 		vecError = new Vector<String>();
 		username = username.toLowerCase();
-		long userID = -1;
+		int userID = -1;
 		
 		SQL = "Select id, pass, type from user where username = ? ;";	
 		
@@ -68,7 +68,7 @@ public class Login extends ActionSupport{
 				dbcn.close();
 				return ERROR;
 			}
-			userID = rs.getLong(1);
+			userID = rs.getInt(1);
 			checkword = rs.getString(2);
 			accountType = rs.getString(3);
 			if (checkword == null){

@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-import edu.uga.cs.lumina.discovery.util.ErrorMesg;
+import edu.uga.cs.lumina.discovery.util.ErrorMessage;
 import edu.uga.radiant.util.DataBaseConnection;
 import edu.uga.radiant.util.QueryManager;
 import edu.uga.radiant.util.RadiantToolConfig;
@@ -42,12 +42,12 @@ public class DownloadWSDL extends ActionSupport{
 	/**
 	 * error message
 	 */
-	private ErrorMesg error;
+	private ErrorMessage error;
 	
 	/**
 	 * the collection of error message
 	 */
-	private Vector<ErrorMesg> vecError;
+	private Vector<ErrorMessage> vecError;
  
 	/**
 	 * The error message
@@ -101,7 +101,7 @@ public class DownloadWSDL extends ActionSupport{
 		} catch (Exception e) {
 			e.printStackTrace();
 			error.setErrormessage(e.toString());
-			vecError = new Vector<ErrorMesg>();
+			vecError = new Vector<ErrorMessage>();
 			vecError.add(error);
 			dbcn.close();
 			
@@ -128,11 +128,11 @@ public class DownloadWSDL extends ActionSupport{
 		return fileName;
 	}
 
-	public void setVecError(Vector<ErrorMesg> vecError) {
+	public void setVecError(Vector<ErrorMessage> vecError) {
 		this.vecError = vecError;
 	}
 
-	public Vector<ErrorMesg> getVecError() {
+	public Vector<ErrorMessage> getVecError() {
 		return vecError;
 	}
 

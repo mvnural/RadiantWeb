@@ -167,6 +167,11 @@
     <type>tld</type>
   </dependency>
      
+  <dependency>
+  	<groupId>net.sourceforge.owlapi</groupId>
+  	<artifactId>owlapi-api</artifactId>
+  	<version>3.4.9</version>
+  </dependency>
   </dependencies>
   
 

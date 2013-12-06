@@ -48,7 +48,7 @@ public class LoadOWLTree {
             }
         	
         	Set<OWLClass> subcls = mgr.getDirectSubClasses(clazz);
-        	if(subcls.size() > 1){
+        	if(subcls.size() >= 1){
                 buf.append("<ul>");
                 ul = true;
             }

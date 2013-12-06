@@ -188,8 +188,9 @@ public class LoadWSDLTree {
                     + "value=\"element:" + simple.getName() + " " + message.getName() + "\" title='" + eleDoc + "'>"
                     + "<span style='width:35%;float:left'>" + simple.getName() + required + "</span>"
                     + "<span onClick=\"recommend(" + simple.getId() + ", '" + simple.getName() + "', 'simple' ,'" + eleDoc + "')\" class='ui-button ui-state-default ui-corner-all' style='background:#616D7E;color: white; text-align:center;;width:120px;margin:2px'>Recommend Terms</span>"
-                    + "<span onClick=\"addSchemaMapper(" + simple.getId() + ")\" class='ui-button ui-state-default ui-corner-all' style='text-align:center;background:#616D7E;color:white;width:120px;margin:2px'>Add SchemaMapper</span></div>");
-            printSimepleAnnotation(buf, simple, attrval);
+                    //+ "<span onClick=\"addSchemaMapper(" + simple.getId() + ")\" class='ui-button ui-state-default ui-corner-all' style='text-align:center;background:#616D7E;color:white;width:120px;margin:2px'>Add SchemaMapper</span>"
+                    + "</div>");
+            printSimpleAnnotation(buf, simple, attrval);
             buf.append("<div name=\"simple-" + simple.getId() + "-annotation\" class=\"annotation\" value=\""+attrval+"\"></div></li>");
     	}
     	buf.append("</ul>");
@@ -221,8 +222,9 @@ public class LoadWSDLTree {
                     + "value=\"element:" + simple.getName() + " " + complex.getName() + "\" title='" + eleDoc + "'>"
                     + "<span style='width:35%;float:left'>" + simple.getName() + required + "</span>"
                     + "<span onClick=\"recommend('" + simple.getId() + "', '" + simple.getName() + "' ,'simple' ,'" + eleDoc + "')\" class='ui-button ui-state-default ui-corner-all' style='background:#616D7E;color: white; text-align:center;;width:120px;margin:2px'>Recommend Terms</span>"
-                    + "<span onClick=\"addSchemaMapper(" + simple.getId() + ")\" class='ui-button ui-state-default ui-corner-all' style='text-align:center;background:#616D7E;color:white;width:120px;margin:2px'>Add SchemaMapper</span></div>");
-            printSimepleAnnotation(buf, simple, attrval);
+                    //+ "<span onClick=\"addSchemaMapper(" + simple.getId() + ")\" class='ui-button ui-state-default ui-corner-all' style='text-align:center;background:#616D7E;color:white;width:120px;margin:2px'>Add SchemaMapper</span>"
+                    + "</div>");
+            printSimpleAnnotation(buf, simple, attrval);
             buf.append("<div name=\"simple-" + simple.getId() + "-annotation\" class=\"annotation\" value=\""+attrval+"\"></div></li>");
     	}
     	buf.append("</ul>");
@@ -275,7 +277,7 @@ public class LoadWSDLTree {
         }
 	}
     
-    private static void printSimepleAnnotation(StringBuffer buf, SimpleTypeOBJ simple, String attrval) 
+    private static void printSimpleAnnotation(StringBuffer buf, SimpleTypeOBJ simple, String attrval) 
     {
     	if(simple.getModelReference() != null) {
             String[] values = simple.getModelReference().toString().split(" ");

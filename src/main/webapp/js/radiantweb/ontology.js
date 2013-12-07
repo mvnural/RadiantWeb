@@ -44,7 +44,7 @@
 				 var id;
 				 document.getElementById("searchResults").innerHTML = response.innerHtml;
 				 $("#searchOntologyDialog").dialog("open");
-				 $("#searchReslutSelectable li.ontologySearchResullts").each(function(){
+				 $("#searchResultSelectable li.ontologySearchResults").each(function(){
                      //alert(this);
                      $(this).dblclick(function(){
                     	 var id = $(this).attr("data");
@@ -52,10 +52,10 @@
                     	 openOWLNode(id);
                      });
                  });
-                 $("#searchReslutSelectable").selectable({
+                 $("#searchResultSelectable").selectable({
                 	 filter:'li',
                 	 selected: function(){
-                		 id = $("#searchReslutSelectable li.ui-selected").attr("data");
+                		 id = $("#searchResultSelectable li.ui-selected").attr("data");
                 	 }
                  });
         	 }else{
@@ -74,9 +74,7 @@
 		 try{
 			 var response = eval("(" + responseText + ")");
 			 var errormsg = response.errormsg;
-			 //var owlImportURL = response.owlImportURL;
-			 //alert(owlImportURL);
-			 //alert(errormsg);
+			 
 			 if (errormsg == '' ){
 				 document.getElementById("ontologyinfo").innerHTML = response.ontologyinfo;
 				 
@@ -149,16 +147,19 @@
 			 alert("No file selected or file is over 10MB");
 		 }
    	 }
+	
 	//before owl file upload process
 	jQuery(document).subscribe('before_owl', function(event,data) {
-		//alert("ok");
 		document.getElementById('pbar2').innerHTML = "<img src='images/processBar.gif' alt='loading... please wait' />";
 	});
 	//complete owl file upload process
 	jQuery(document).subscribe('complete_owl', function(event,data) {
-		//alert("receive");
 		document.getElementById('pbar2').innerHTML = "";
-	 	setOwlHierarchy(event.originalEvent.request.responseText);
+		if(event.originalEvent.status == "timeout"){
+			alert("The request has been timed out. Please try again later.");
+		}else{
+			setOwlHierarchy(event.originalEvent.request.responseText);			
+		}
 	});
 	
 	

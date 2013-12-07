@@ -45,7 +45,7 @@ public class SearchOntologyTerm extends ActionSupport {
 		logger.debug("searchTerms size = " + searchTerms.size());
 		
 	    Iterator<String> it = searchTerms.keySet().iterator();
-	    buf.append("<ol id='searchReslutSelectable'>");
+	    buf.append("<ol id='searchResultSelectable'>");
 	    int i = 0;
 	    while(it.hasNext() && i < 20){
 	        String iri = it.next();
@@ -55,7 +55,7 @@ public class SearchOntologyTerm extends ActionSupport {
 	        String fragmentData = LoadOWLTree.charReplace(iri);
 	        String score = searchTerms.get(iri).toString();
 	        if (score.length() > 6) score = score.substring(0, 6); 
-	        buf.append("<li data='" + fragmentData + "' class=\"ui-widget-content ontologySearchResullts\" style=\"margin:6px;padding:2px;\"><span value=\"" + fragmentData + "\" style='width:50%;float:left'><b>" + label + " : " + score + "</b></span><br/><" + iri + ">" + definition + "</li>");        
+	        buf.append("<li data='" + fragmentData + "' class=\"ui-widget-content ontologySearchResults\" style=\"margin:6px;padding:2px;\"><span value=\"" + fragmentData + "\" style='width:50%;float:left'><b>" + label + " : " + score + "</b></span><br/><" + iri + ">" + ((definition== null)? "" : definition) + "</li>");        
 	        i++;
 	    }
 	    buf.append("<ol>");

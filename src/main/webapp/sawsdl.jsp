@@ -1,6 +1,6 @@
 <%--
     The main page that displays the WSDL and ontology. 
-    It requests all the funtions of the tool and is updated throough ajax for every request.
+    It requests all the functions of the tool and is updated through ajax for every request.
     Document   : index
     Created on : May 26, 2011, 4:32:06 PM
     Author     : Chaitanya Guttula, Yung Long Li
@@ -557,6 +557,7 @@ $(function() {
 						options_submit_ajax.targets = "myAjaxTarget2";	// used to store the response text 
 						options_submit_ajax.href = "#";
 						options_submit_ajax.formids = "owl_form";	// submit form id
+						options_submit_ajax.timeout = "30000";	// cancel request after 30 seconds.
 						
 						jQuery.struts2_jquery.bind(jQuery('#submit_owl_ajax'),options_submit_ajax);
 						

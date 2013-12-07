@@ -1,9 +1,14 @@
 package edu.uga.radiant.ajax;
 
-import java.util.Iterator;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.*;
 
+import edu.uga.radiantweb.freemarker.model.OntologySearchResult;
+import freemarker.template.*;
 import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
 import org.semanticweb.owlapi.model.OWLClass;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -26,40 +31,67 @@ public class SearchOntologyTerm extends ActionSupport {
 	private String innerHtml;
 	
 	public String execute() {
-		
-	    Logger logger = RadiantToolConfig.getLogger();
+		/**
+         * For testing purposes only. This should be moved out from here.
+         *
+		* */
+        Configuration cfg = new Configuration();
+
+        cfg.setServletContextForTemplateLoading(ServletActionContext.getServletContext(), "/templates");
+        cfg.setObjectWrapper(new DefaultObjectWrapper());
+        cfg.setDefaultEncoding("UTF-8");
+        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
+        cfg.setIncompatibleImprovements(new Version(2, 3, 20));
+ 	    Logger logger = RadiantToolConfig.getLogger();
 		errormsg = "";
 		
 		@SuppressWarnings("rawtypes")
 		Map session = ActionContext.getContext().getSession();
 		OntologyManager mgr = (OntologyManager) session.get("OntologyManager");
 		
-		StringBuffer buf = new StringBuffer();
+		StringWriter buf = new StringWriter();
 		SearchOntology search = new SearchOntology(mgr);
-		
-		
-		logger.debug("term = " + term);
-		SortValueMap<String, Double> searchTerms = search.search(term);
-		
-		
-		logger.debug("searchTerms size = " + searchTerms.size());
-		
-	    Iterator<String> it = searchTerms.keySet().iterator();
-	    buf.append("<ol id='searchResultSelectable'>");
-	    int i = 0;
-	    while(it.hasNext() && i < 20){
-	        String iri = it.next();
-	        OWLClass cls = mgr.getConceptClass(iri);
-	        String definition = mgr.getClassDefinition(cls);
-	        String label = mgr.getClassLabel(cls);
-	        String fragmentData = LoadOWLTree.charReplace(iri);
-	        String score = searchTerms.get(iri).toString();
-	        if (score.length() > 6) score = score.substring(0, 6); 
-	        buf.append("<li data='" + fragmentData + "' class=\"ui-widget-content ontologySearchResults\" style=\"margin:6px;padding:2px;\"><span value=\"" + fragmentData + "\" style='width:50%;float:left'><b>" + label + " : " + score + "</b></span><br/><" + iri + ">" + ((definition== null)? "" : definition) + "</li>");        
-	        i++;
-	    }
-	    buf.append("<ol>");
-	    innerHtml = buf.toString();
+
+
+        /*Create data model for freemarker template*/
+        Map templateModel = new HashMap();
+        List<OntologySearchResult> searchResults = new ArrayList<OntologySearchResult>();
+        templateModel.put("searchResults", searchResults);
+
+
+        logger.debug("term = " + term);
+        SortValueMap<String, Double> searchTerms = search.search(term);
+        logger.debug("searchTerms size = " + searchTerms.size());
+
+        Iterator<String> it = searchTerms.keySet().iterator();
+        int i = 0;
+        while(it.hasNext() && i < 20){
+            String iri = it.next();
+            OWLClass cls = mgr.getConceptClass(iri);
+            OntologySearchResult result = new OntologySearchResult();
+            result.setDefinition(mgr.getClassDefinition(cls));
+            result.setLabel(mgr.getClassLabel(cls));
+            result.setFragmentData(LoadOWLTree.charReplace(iri));
+            String score = searchTerms.get(iri).toString();
+            if (score.length() > 6){
+                score = score.substring(0, 6);
+            }
+
+            result.setScore(score);
+            searchResults.add(result);
+
+            i++;
+        }
+        try {
+            Template temp = cfg.getTemplate("OntologySearchResults.ftl");
+            temp.process(templateModel, buf);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
+
+        innerHtml = buf.toString();
 	    
 	    return SUCCESS;
 	}

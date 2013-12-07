@@ -4,7 +4,7 @@
   <groupId>edu.cs.uga</groupId>
   <artifactId>radiantweb</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>radiantweb Maven Webapp</name>
+  <name>RadiantWeb Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -62,11 +62,6 @@
     	<groupId>exist</groupId>
     	<artifactId>exist</artifactId>
     	<version>0.9.2</version>
-    </dependency>
-    <dependency>
-    	<groupId>org.freemarker</groupId>
-    	<artifactId>freemarker</artifactId>
-    	<version>2.3.20</version>
     </dependency>
     <dependency>
     	<groupId>org.javassist</groupId>
@@ -171,6 +166,11 @@
   	<groupId>net.sourceforge.owlapi</groupId>
   	<artifactId>owlapi-distribution</artifactId>
   	<version>3.4.9</version>
+  </dependency>
+  <dependency>
+  	<groupId>org.freemarker</groupId>
+  	<artifactId>freemarker</artifactId>
+  	<version>2.3.20</version>
   </dependency>
   </dependencies>
   

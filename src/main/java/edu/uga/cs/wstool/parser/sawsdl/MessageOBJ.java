@@ -51,19 +51,19 @@ public class MessageOBJ implements AnnotationOBJ {
 		return name;
 	}
 
-	public void setComplextype(List<ComplexTypeOBJ> complextype) {
+	public void setComplexType(List<ComplexTypeOBJ> complextype) {
 		this.complextype = complextype;
 	}
 
-	public List<ComplexTypeOBJ> getComplextype() {
+	public List<ComplexTypeOBJ> getComplexType() {
 		return complextype;
 	}
 
-	public void setSimpletype(List<SimpleTypeOBJ> simpletype) {
+	public void setSimpleType(List<SimpleTypeOBJ> simpletype) {
 		this.simpletype = simpletype;
 	}
 
-	public List<SimpleTypeOBJ> getSimpletype() {
+	public List<SimpleTypeOBJ> getSimpleType() {
 		return simpletype;
 	}
 

@@ -44,11 +44,11 @@ public class ComplexTypeOBJ implements AnnotationOBJ {
      */
 	private List<SimpleTypeOBJ> simples = new ArrayList<SimpleTypeOBJ>();
 
-	public void setComplextypes(List<ComplexTypeOBJ> complextypes) {
+	public void setComplexTypes(List<ComplexTypeOBJ> complextypes) {
 		this.complextypes = complextypes;
 	}
 
-	public List<ComplexTypeOBJ> getComplextypes() {
+	public List<ComplexTypeOBJ> getComplexTypes() {
 		return complextypes;
 	}
 

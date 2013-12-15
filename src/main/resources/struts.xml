@@ -5,6 +5,10 @@
 <struts>
 <constant name="struts.i18n.encoding" value="UTF-8"></constant>
 <constant name="struts.multipart.maxSize" value="10000000"></constant>
+
+<!-- Configuration object that is used to create freemarker templates -->
+<bean class="edu.uga.radiantweb.freemarker.ConfigurationFactory" name="freemarkerConfiguration" scope="singleton" />
+
 <package name="main" extends="struts-default">
 <!-- set up Action class to deal with the jsp of success and error-->
 	

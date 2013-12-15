@@ -38,7 +38,6 @@
 package edu.uga.cs.wstool.parser.sawsdl;
 
 import edu.uga.cs.wstool.parser.xml.XMLParser;
-import edu.uga.radiant.util.DataBaseConnection;
 import edu.uga.radiant.util.DatabaseManager;
 import edu.uga.radiant.util.QueryManager;
 import edu.uga.radiant.util.WSDLConstants;
@@ -617,7 +616,7 @@ public class SAWSDLParser extends XMLParser
 						}
 					}
 	                // set complex type list
-					newOBJ.setComplextypes(model.getComplextypes());
+					newOBJ.setComplexTypes(model.getComplexTypes());
 					// set simple type list
 					newOBJ.setSimples(model.getSimples());
 					complexs.add(newOBJ);
@@ -653,8 +652,8 @@ public class SAWSDLParser extends XMLParser
         	}
         	
         }
-        messageobj.setComplextype(complexs);
-        messageobj.setSimpletype(simples);
+        messageobj.setComplexType(complexs);
+        messageobj.setSimpleType(simples);
         return messageobj;
     }
     
@@ -761,7 +760,7 @@ public class SAWSDLParser extends XMLParser
 								}
 							}
 			                // set complex type list
-							newOBJ.setComplextypes(model.getComplextypes());
+							newOBJ.setComplexTypes(model.getComplexTypes());
 							// set simple type list
 							newOBJ.setSimples(model.getSimples());
 							complexList.add(newOBJ);
@@ -797,7 +796,7 @@ public class SAWSDLParser extends XMLParser
 					}
 	            }
 				if (checked == true){
-					obj.setComplextypes(complexList);
+					obj.setComplexTypes(complexList);
 					obj.setSimples(sequence);
 					result.put(ele.getAttributeValue("name"), obj);
 					checkedEle.add(ele);
@@ -854,12 +853,12 @@ public class SAWSDLParser extends XMLParser
     	
     	List<ComplexTypeOBJ> next = new ArrayList<ComplexTypeOBJ>();
     	List<SimpleTypeOBJ> result = new ArrayList<SimpleTypeOBJ>();
-    	result.addAll(ms.getSimpletype());
-    	next = ms.getComplextype();
+    	result.addAll(ms.getSimpleType());
+    	next = ms.getComplexType();
     	while (next.size() > 0){
     		List<ComplexTypeOBJ> temp = new ArrayList<ComplexTypeOBJ>();
     		for (ComplexTypeOBJ plex : next){
-    			temp.addAll(plex.getComplextypes());
+    			temp.addAll(plex.getComplexTypes());
     			result.addAll(plex.getSimples());
     		}
     		next = temp;
@@ -878,11 +877,11 @@ public class SAWSDLParser extends XMLParser
     	List<ComplexTypeOBJ> next = new ArrayList<ComplexTypeOBJ>();
     	List<SimpleTypeOBJ> result = new ArrayList<SimpleTypeOBJ>();
     	result.addAll(complex.getSimples());
-    	next.addAll(complex.getComplextypes());
+    	next.addAll(complex.getComplexTypes());
     	while (next.size() > 0){
     		List<ComplexTypeOBJ> temp = new ArrayList<ComplexTypeOBJ>();
     		for (ComplexTypeOBJ plex : next){
-    			temp.addAll(plex.getComplextypes());
+    			temp.addAll(plex.getComplexTypes());
     			result.addAll(plex.getSimples());
     		}
     		next = temp;
@@ -954,7 +953,7 @@ public class SAWSDLParser extends XMLParser
     	System.out.println(indent + "   complex concept = " + obj.getModelReference());
     	printSimpleType(indent, obj.getSimples());
     	indent = indent + "   ";
-    	for (ComplexTypeOBJ obj1 : obj.getComplextypes()){
+    	for (ComplexTypeOBJ obj1 : obj.getComplexTypes()){
     		printComplexType(indent, obj1);
     	}
     }
@@ -1243,9 +1242,9 @@ public class SAWSDLParser extends XMLParser
             System.out.println("input = " + input.getName());
             System.out.println("input concept = " + input.getModelReference());
             System.out.println("input doc = " + input.getName());
-            printSimpleType(indent, input.getSimpletype());
+            printSimpleType(indent, input.getSimpleType());
             indent = "   ";
-            List<ComplexTypeOBJ> temp = input.getComplextype();
+            List<ComplexTypeOBJ> temp = input.getComplexType();
             for (ComplexTypeOBJ complex : temp){
             	printComplexType(indent, complex);
             }
@@ -1263,9 +1262,9 @@ public class SAWSDLParser extends XMLParser
             }
             */
             System.out.println("output = " + output.getName());
-            printSimpleType(indent, output.getSimpletype());
+            printSimpleType(indent, output.getSimpleType());
             indent = "   ";
-            temp = output.getComplextype();
+            temp = output.getComplexType();
             for (ComplexTypeOBJ complex : temp){
             	printComplexType(indent, complex);
             }

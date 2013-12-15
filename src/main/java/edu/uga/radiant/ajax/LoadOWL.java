@@ -1,28 +1,25 @@
 package edu.uga.radiant.ajax;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.inject.Inject;
+import edu.uga.radiant.ontology.OntologyManager;
+import edu.uga.radiant.printTree.LoadOWLTree;
+import edu.uga.radiant.util.RadiantToolConfig;
+import edu.uga.radiantweb.freemarker.ConfigurationFactory;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-
-import edu.uga.radiant.ontology.OntologyManager;
-import edu.uga.radiant.printTree.LoadOWLTree;
-import edu.uga.radiant.util.RadiantToolConfig;
+import javax.servlet.http.HttpServletRequest;
+import java.io.*;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoadOWL extends ActionSupport {
 	
@@ -59,6 +56,11 @@ public class LoadOWL extends ActionSupport {
 	/** the active input tab index of owl
      */
 	private String tabIndex;
+
+    /** The freemarker configuration bean used for creating fremarker templates. Injected by Struts as defined in Struts.xml
+     */
+    @Inject("freemarkerConfiguration")
+    private ConfigurationFactory freemarkerConfig;
 	
 	@SuppressWarnings("unchecked")
 	public String execute() {
@@ -66,8 +68,7 @@ public class LoadOWL extends ActionSupport {
 	    Logger logger = RadiantToolConfig.getLogger();
 		String extension = ".owl";
 		String extension1 = ".OWL";
-		StringBuffer buf = new StringBuffer();
-		
+
 		OntologyManager mgr = null;
 		OWLOntology ontology = null;
         String owlPath = "";
@@ -144,13 +145,31 @@ public class LoadOWL extends ActionSupport {
 		    	session.remove("operation");
 		    	session.remove("parameter");
 		    	if (page.equals("wsdl")){
-		    		ontologyinfo = "<span style=\"padding:2px;vertical-align: middle;\"> Search: </span><div style=\"padding-bottom:4px;display: inline;vertical-align: middle;margin-top: auto;margin: auto;\"><input type=\"text\" id=\"ontsearchterm\" name=\"ontsearchterm\" class=\"ui-corner-all ui-autocomplete-input\" style=\"vertical-align: middle;\" onkeydown=\"getList(this.value);\" autocomplete=\"off\" role=\"textbox\" aria-autocomplete=\"list\" aria-haspopup=\"true\"><img id=\"searchontology\" src=\"styles/images/search.gif\" alt=\"\" style=\"padding-left: 5px; height: 20px; vertical-align: middle;\" onclick=\"searchOntology();\"></div><span id=\"setoptions\" class=\"ui-button ui-corner-all\" style=\"color:white;background:#616D7E;padding: 6px;margin-left:3px;margin-right:3px;float: right;margin: auto;\">Set Ontology Options</span>";
+//		    		ontologyinfo = "<span style=\"padding:2px;vertical-align: middle;\"> Search: </span><div style=\"padding-bottom:4px;display: inline;vertical-align: middle;margin-top: auto;margin: auto;\"><input type=\"text\" id=\"ontsearchterm\" name=\"ontsearchterm\" class=\"ui-corner-all ui-autocomplete-input\" style=\"vertical-align: middle;\" onkeydown=\"getList(this.value);\" autocomplete=\"off\" role=\"textbox\" aria-autocomplete=\"list\" aria-haspopup=\"true\"><img id=\"searchontology\" src=\"styles/images/search.gif\" alt=\"\" style=\"padding-left: 5px; height: 20px; vertical-align: middle;\" onclick=\"searchOntology();\"></div><span id=\"setoptions\" class=\"ui-button ui-corner-all\" style=\"color:white;background:#616D7E;padding: 6px;margin-left:3px;margin-right:3px;float: right;margin: auto;\">Set Ontology Options</span>";
 		    		//ontologyinfo = "<span style=\"width:25%;float:left;padding:2px\"> Search: </span><div style=\"padding-bottom:4px;float:left\"><input type=\"text\" id=\"ontsearchterm\" name=\"ontsearchterm\" class=\"ui-corner-all\" style=\"float:left;\" onkeydown=\"getList(this.value);\" /><img id=\"searchontology\" src=\"styles/images/search.gif\" alt=\"\" style=\"padding-right: 5px; height: 20px; padding-bottom: 2px;\" onclick=\"searchOntology();\" /></div><span id=\"setoptions\" class=\"ui-button ui-corner-all\" style=\"color:white;background:#616D7E;padding:3px;margin-left:3px;margin-right:3px;\" >Set Options</span></div>";
 			    }else{
-		    		ontologyinfo = "<span style=\"width:40%;float:left;padding:2px\">" + ontId + "</span><div style=\"padding-bottom:4px;float:left\"><input type=\"text\" id=\"ontsearchterm\" name=\"ontsearchterm\" class=\"ui-corner-all\" style=\"float:left;\" onkeydown=\"getList(this.value);\" /><img id=\"searchontology\" src=\"styles/images/search.gif\" alt=\"\" style=\"padding-right: 5px; height: 20px; padding-bottom: 2px;\" onclick=\"searchOntology();\" /></div><span id=\"setoptions\" class=\"ui-button ui-corner-all\" style=\"color:white;background:#616D7E;padding:3px;margin-left:3px;margin-right:3px;\" >Set Options</span></div>";
+//		    		ontologyinfo = "<span style=\"width:40%;float:left;padding:2px\">" + ontId + "</span><div style=\"padding-bottom:4px;float:left\"><input type=\"text\" id=\"ontsearchterm\" name=\"ontsearchterm\" class=\"ui-corner-all\" style=\"float:left;\" onkeydown=\"getList(this.value);\" /><img id=\"searchontology\" src=\"styles/images/search.gif\" alt=\"\" style=\"padding-right: 5px; height: 20px; padding-bottom: 2px;\" onclick=\"searchOntology();\" /></div><span id=\"setoptions\" class=\"ui-button ui-corner-all\" style=\"color:white;background:#616D7E;padding:3px;margin-left:3px;margin-right:3px;\" >Set Options</span></div>";
 			    }
-		    	LoadOWLTree.drawTree(buf, mgr);
-		    	classes_hierarchy = buf.toString();	
+
+                Map templateModel = new HashMap();
+                templateModel.put("rootNode", LoadOWLTree.constructFreemarkerModel(mgr));
+                //LoadOWLTree.drawTree(buf, mgr);
+
+                StringWriter buf = new StringWriter();
+                StringWriter buf2 = new StringWriter();
+
+                try {
+                    Template temp = freemarkerConfig.getConfig().getTemplate("OntologyViewer.ftl");
+                    temp.process(templateModel, buf);
+                    Template temp2 = freemarkerConfig.getConfig().getTemplate("OntologyViewerInfo.ftl");
+                    temp2.process(new HashMap(),buf2);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (TemplateException e) {
+                    e.printStackTrace();
+                }
+                ontologyinfo = buf2.toString();
+		    	classes_hierarchy = buf.toString();
 		    	logger.debug("classes_hierarchy = " + classes_hierarchy);
 		    	
 			}else{

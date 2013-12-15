@@ -386,7 +386,7 @@ public class Discovery extends ActionSupport {
 					OWLClass cplexCls = mgr.getConceptClass(IRI.create(_inputs[i]).toString());
 					ComplexTypeOBJ model = getComplexTypeModel(cplexCls, mgr);
 					obj.setSimples(model.getSimples());
-					obj.setComplextypes(model.getComplextypes());
+					obj.setComplexTypes(model.getComplexTypes());
 					complexs.add(obj);
 				}else{
 					SimpleTypeOBJ obj = new SimpleTypeOBJ();
@@ -397,8 +397,8 @@ public class Discovery extends ActionSupport {
 					simples.add(obj);
 				}
 			}
-			in.setSimpletype(simples);
-			in.setComplextype(complexs);
+			in.setSimpleType(simples);
+			in.setComplexType(complexs);
 			
 			//define output Parameter
 			String[] _outParameter = listToArray(operationOutputs.get(0));
@@ -427,7 +427,7 @@ public class Discovery extends ActionSupport {
 					OWLClass cplexCls = mgr.getConceptClass(IRI.create(_outputs[i]).toString());
 					ComplexTypeOBJ model = getComplexTypeModel(cplexCls, mgr);
 					obj.setSimples(model.getSimples());
-					obj.setComplextypes(model.getComplextypes());
+					obj.setComplexTypes(model.getComplexTypes());
 					complexs.add(obj);
 				}else{
 					SimpleTypeOBJ obj = new SimpleTypeOBJ();
@@ -438,8 +438,8 @@ public class Discovery extends ActionSupport {
 					simples.add(obj);
 				}
 			}
-			out.setSimpletype(simples);
-			out.setComplextype(complexs);
+			out.setSimpleType(simples);
+			out.setComplexType(complexs);
 			
 			// create request template
 			if (DEBUG) System.out.println("create request template ...");
@@ -688,7 +688,7 @@ public class Discovery extends ActionSupport {
 				OWLClass child = t.getChild();
 				// check the child is complex type or not
 				ComplexTypeOBJ complex = getComplexTypeModel(child, mgr);
-				if (complex.getComplextypes().size() > 0 || complex.getSimples().size() > 0){
+				if (complex.getComplexTypes().size() > 0 || complex.getSimples().size() > 0){
 					complex_complex.add(complex);
 				}else{
 					SimpleTypeOBJ s = new SimpleTypeOBJ();
@@ -701,7 +701,7 @@ public class Discovery extends ActionSupport {
 			}
 		}
 		result.setSimples(complex_simples);
-		result.setComplextypes(complex_complex);
+		result.setComplexTypes(complex_complex);
 		return result;
 	}
 

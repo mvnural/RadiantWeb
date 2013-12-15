@@ -1,8 +1,15 @@
 package edu.uga.radiant.ajax;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.opensymphony.xwork2.inject.Inject;
+import edu.uga.radiantweb.freemarker.ConfigurationFactory;
+import freemarker.template.*;
 import org.apache.log4j.Logger;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -62,6 +69,9 @@ public class RecommendConcept extends ActionSupport {
 	/** the tab index of owl
      */
 	private String tabIndex;
+
+    @Inject("freemarkerConfiguration")
+    private ConfigurationFactory freemarkerConfig;
 	
 	@SuppressWarnings("unchecked")
 	public String execute() {
@@ -69,9 +79,9 @@ public class RecommendConcept extends ActionSupport {
 	    Logger logger = RadiantToolConfig.getLogger();
 		OntologyManager mgr = null;
 		SortValueMap<SuggestionOBJ, Double> sug = null;
-		ArrayList<String> operationIRI = new ArrayList<String>();
-		ArrayList<String> paramIRI = new ArrayList<String>();
-		@SuppressWarnings("rawtypes")
+        ArrayList<String> operationIRI;
+        ArrayList<String> paramIRI;
+        @SuppressWarnings("rawtypes")
 		Map session = ActionContext.getContext().getSession();
 		
 		if (tabIndex.equals("0")){
@@ -95,84 +105,79 @@ public class RecommendConcept extends ActionSupport {
 		operationIRI = (ArrayList<String>)session.get("operation");
 		paramIRI = (ArrayList<String>)session.get("parameter");
 		errormsg = "";
-		
-		StringBuffer buf = new StringBuffer();
-		
-		try {
-			
-			if(mgr != null){
-				
-				if ((EleName.equals("")) && (EleDoc.equals(""))){
-					errormsg = "name and typing words are empty";
-					return ERROR;
-				}
-				
-				if ((operationIRI == null) || (paramIRI == null)){
-					operationIRI = LoadOWL.getOwlOperationSuperClasses(mgr);
-					session.put("operation", operationIRI);
-					paramIRI = LoadOWL.getOwlParamSuperClasses(mgr);
-					session.put("parameter", paramIRI);
-				}
-				
-				SimpleStringMatcher matcher = new SimpleStringMatcher(mgr);
-				if(EleType.equalsIgnoreCase("operation") || EleType.equalsIgnoreCase("method")){
-	        		sug = matcher.getOpSuggestion(EleName, EleDoc, operationIRI);
-	        	}else if(EleType.equalsIgnoreCase("param")){
-	            	sug = matcher.getParamSuggestion(EleName, EleDoc, paramIRI);
-	        	}else if(EleType.equalsIgnoreCase("complex")){
-	            	sug = matcher.getComplexSuggestion(wsparser, EleID, EleName, EleDoc, operation, paramIRI);
-	        	}else if(EleType.equalsIgnoreCase("simple")){
-	            	sug = matcher.getParamSuggestion(EleName, EleDoc, paramIRI);
-	        	}
-				
-				logger.debug("sug size = " + sug.size());
-				int tabidx = Integer.parseInt(tabIndex) + 1;
-				
-	        	buf.append("<p>Choose the best recommendation for this element : (Owl" + tabidx + " classes)</p>");
-	        	buf.append("<div style=\"overflow:auto;\">");
-	        	buf.append("<form name=\"recommend concept\" id=\"" + EleType + ":" + EleName + "\">");
-	        	
-	        	if((sug == null) || (sug.size() == 0)){
-	        		errormsg = "No match suggestion!";
-	        		return ERROR;
-	        	}
-	        	
-	        	if((sug != null) && (sug.size() != 0)){
-	        	    buf.append("<fieldset>");
-	        	    int counter = 0;
-	        	    for(SuggestionOBJ suggestobj : sug.keySet()){
-	        	        counter++;
-	        	        if (counter > 15) break;
-	        	    	String value = suggestobj.getConceptLabel();
-	        	        String description = suggestobj.getConceptDoc();
-	        	        String owlid = suggestobj.getConceptIRI();
-	        	        String valueId = owlid;
-	        	        String score = "";
-	        	        if (sug.get(suggestobj).toString().length() > 6){
-	        	        	score = sug.get(suggestobj).toString().substring(0, 6);
-	        	        }else{
-	        	        	score = sug.get(suggestobj).toString();
-	        	        }
-	        	        
-	        	        buf.append("<input id=\"" + value + "\" name=\"option\" value='" + valueId + "' type=\"radio\" title=\"" + description + "\" /><label title=\"" + suggestobj.getConceptDoc() + "\" >" + value + " : <b>" + score + "</b></label><br>");
-	            	}
-	        	   
-	        		buf.append("</form>");
-	        		buf.append("</div>");
-	        		
-	        	}else{
-	        		errormsg = "No match suggestion!";
-	        	}
+
+
+        try {
+
+            if(mgr != null){
+
+                if ((EleName.equals("")) && (EleDoc.equals(""))){
+                    errormsg = "name and typing words are empty";
+                    return ERROR;
+                }
+
+                if ((operationIRI == null) || (paramIRI == null)){
+                    operationIRI = LoadOWL.getOwlOperationSuperClasses(mgr);
+                    session.put("operation", operationIRI);
+                    paramIRI = LoadOWL.getOwlParamSuperClasses(mgr);
+                    session.put("parameter", paramIRI);
+                }
+
+                SimpleStringMatcher matcher = new SimpleStringMatcher(mgr);
+                if(EleType.equalsIgnoreCase("operation") || EleType.equalsIgnoreCase("method")){
+                    sug = matcher.getOpSuggestion(EleName, EleDoc, operationIRI);
+                }else if(EleType.equalsIgnoreCase("param")){
+                    sug = matcher.getParamSuggestion(EleName, EleDoc, paramIRI);
+                }else if(EleType.equalsIgnoreCase("complex")){
+                    sug = matcher.getComplexSuggestion(wsparser, EleID, EleName, EleDoc, operation, paramIRI);
+                }else if(EleType.equalsIgnoreCase("simple")){
+                    sug = matcher.getParamSuggestion(EleName, EleDoc, paramIRI);
+                }
+
+                logger.debug("sug size = " + sug.size());
+                int tabidx = Integer.parseInt(tabIndex) + 1;
+
+                if((sug == null) || (sug.size() == 0)){
+                    errormsg = "No match suggestion!";
+                    return ERROR;
+                }else {
+                    Map templateModel = new HashMap();
+                    List<SuggestionOBJ> suggestions = new ArrayList<SuggestionOBJ>();
+                    templateModel.put("suggestions", suggestions);
+                    templateModel.put("elementType", EleType);
+                    templateModel.put("elementName", EleName);
+                    templateModel.put("tabIndex",tabidx);
+                    int counter = 0;
+                    for (SuggestionOBJ suggestionObject : sug.keySet()) {
+                        counter++;
+                        if (counter > 15) break;
+                        suggestions.add(suggestionObject);
+                    }
+
+                    StringWriter buf = new StringWriter();
+                    try {
+                        /**
+                         * For testing purposes only. This should be moved out from here.
+                         *
+                         * */
+
+                        Template temp = freemarkerConfig.getConfig().getTemplate("RecommendConceptResults.ftl");
+                        temp.process(templateModel, buf);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (TemplateException e) {
+                        e.printStackTrace();
+                    }
+                    logger.debug("buf = " + buf.toString());
+                    innerHtml = buf.toString();
+                }
 	        	
 			}else{
 	        	errormsg = "Error:ontology not loaded or session is expired.";
 	        }
 			
 			
-			logger.debug("buf = " + buf.toString());
-			
-			
-			innerHtml = buf.toString();
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,9 +1,12 @@
 package edu.uga.radiant.printTree;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import edu.uga.radiantweb.freemarker.model.OntologyNode;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
@@ -13,69 +16,57 @@ public class LoadOWLTree {
 
 	final static String CLASSIMG = "";
 	private static int count = 0;
-	
-	public static void drawTree(StringBuffer buf, OntologyManager mgr) throws IOException {
+
+    public static OntologyNode constructFreemarkerModel(OntologyManager manager){
+        OWLClass thing = manager.getThing();
+        OntologyNode rootNode = new OntologyNode();
+        rootNode.setIRI("Thing");
+        rootNode.setValue("Thing");
+        rootNode.setChildren(getNodeChildren(thing, manager));
+
+        return rootNode;
+    }
+
+    private static List<OntologyNode> getNodeChildren(OWLClass parent, OntologyManager manager) {
+        List<OntologyNode> children = new ArrayList<OntologyNode>();
+        for (OWLClass child : manager.getDirectSubClasses(parent)){
+            String value = manager.getClassLabel(child);
+            if (!value.equals("Nothing")){ // Do not consider owl:Nothing for the tree if it exists
+                OntologyNode childNode = new OntologyNode();
+                childNode.setIRI(child.getIRI().toString());
+                childNode.setDefinition(manager.getClassDefinition(child));
+                childNode.setValue(value);
+                childNode.setSpanId("spanidowlclass" + (++count));
+                childNode.setIRIFragment(charReplace(child.getIRI().toString()));
+                childNode.setChildren(getNodeChildren(child, manager));
+                children.add(childNode);
+            }
+        }
+
+        return children;
+    }
+
+    public static String charReplace(String iri) {
+        return iri.replace('.', '_').replace('/', '_').replace(':', '_').replace('#', '_');
+    }
+
+ /*   public static void drawTree(StringBuffer buf, OntologyManager mgr) throws IOException {
 		OWLClass thing = mgr.getThing();
-		buf.append("<div id=\"root\"><ul><li id='Thing'><span>"+CLASSIMG+"Thing</span>");
-		buf.append("<ul>");
+//		buf.append("<div id=\"root\"><ul><li id='Thing'><span>"+CLASSIMG+"Thing</span>");
+//		buf.append("<ul>");
 		if (thing == null){
 			Set<OWLClass> roots = getTopClasses(mgr);
-			printHierarchy(roots , buf, mgr);
+            for (OWLClass child : roots){
+                printHierarchy(child, buf, mgr);
+            }
+
 		}else{
 			printHierarchy(thing, buf, mgr);
 		}
-		buf.append("</ul>");
-		buf.append("</li></ul></div>");
+//		buf.append("</ul>");
+//		buf.append("</li></ul></div>");
 	}
-
-	private static void printHierarchy(OWLClass clazz, StringBuffer buf, OntologyManager mgr) throws IOException {
-		boolean ul = false;
-		String value = mgr.getClassLabel(clazz);
-		if (!value.contains("Nothing")) {
-        	String id = clazz.getIRI().toString();
-        	if (!clazz.getIRI().toString().equalsIgnoreCase("http://www.w3.org/2002/07/owl#Thing")){
-        		count++;
-        		String definition = mgr.getClassDefinition(clazz);
-        		if(definition == null){
-                    definition = "";
-                }else{
-                    definition = definition.replaceAll("\n", "");
-                    definition = definition.replaceAll("'", "");
-                }
-        		String spanId = "spanidowlclass"+count;
-                String owlClassIRIFragment = charReplace(clazz.getIRI().toString());
-                buf.append("<li id='"+owlClassIRIFragment+"' data='"+definition+"' ><span id='" + spanId + "' title=" + clazz.getIRI() + " value='" + id + "' onclick=\"selectOWLNode('" + definition + "','" + value + "','" + spanId + "')\">" + value + "</span>");
-            }
-        	
-        	Set<OWLClass> subcls = mgr.getDirectSubClasses(clazz);
-        	if(subcls.size() >= 1){
-                buf.append("<ul>");
-                ul = true;
-            }
-            /* Find the children and recurse */
-            for (OWLClass child : subcls){
-                if (!child.equals(clazz)) {
-                    printHierarchy(child, buf, mgr);
-                }
-            }
-            if(ul) buf.append("</ul>");
-            buf.append("</li>");
-        }
-	 		
-	}
-	
-	private static void printHierarchy(Set<OWLClass> subcls, StringBuffer buf, OntologyManager mgr) throws IOException {
-		/* Find the children and recurse */
-        for (OWLClass child : subcls){
-            printHierarchy(child, buf, mgr);
-        }
-        buf.append("</li>");
-	}
-
-	public static String charReplace(String iri) {
-		return iri.replace('.', '_').replace('/', '_').replace(':', '_').replace('#', '_');
-	}
-	
+*/
 	public static Set<OWLClass> getTopClasses(OntologyManager mgr) {
 		Set<OWLClass> subclasses = new HashSet<OWLClass>();
         for ( OWLClass cls : mgr.getAllOWLclass().values()){

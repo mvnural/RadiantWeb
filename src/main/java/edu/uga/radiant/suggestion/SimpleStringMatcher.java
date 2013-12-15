@@ -420,7 +420,7 @@ public class SimpleStringMatcher {
 				if (cls != null) output.add(node);
 			}
 		}
-    	for (ComplexTypeOBJ clex : cplex.getComplextypes()){
+    	for (ComplexTypeOBJ clex : cplex.getComplexTypes()){
     		if (clex.getModelReference() != null) {
     			OWLClass cls = mgr.getConceptClass(clex.getModelReference().toString());
     			Node node = new Node();

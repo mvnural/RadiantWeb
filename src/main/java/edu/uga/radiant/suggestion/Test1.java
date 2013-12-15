@@ -3,7 +3,6 @@ package edu.uga.radiant.suggestion;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.LinkedHashSet;
 
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -122,7 +121,7 @@ public class Test1 {
         
         // set the complex type person
         cplex1.setSimples(leaves);
-        cplex1.setComplextypes(Nodes);
+        cplex1.setComplexTypes(Nodes);
         
         // print complex type
         SAWSDLParser.printComplexType(indent, cplex1);
@@ -175,7 +174,7 @@ public class Test1 {
         	if (oper.getName().equals("run")){
         		System.out.println("operation name = " + oper.getName());
     			Set<OWLClass> leaves = new HashSet<OWLClass>();
-    			ComplexTypeOBJ cplex = oper.getInput().getComplextype().get(0);
+    			ComplexTypeOBJ cplex = oper.getInput().getComplexType().get(0);
         		for (SimpleTypeOBJ simple : SAWSDLParser.getAllSimpleType(cplex)){
     				OWLClass cls = mgr.getConceptClass(simple.getModelReference().toString());
     				if (cls != null) leaves.add(cls);

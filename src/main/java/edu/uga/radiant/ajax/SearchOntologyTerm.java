@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.*;
 
+import com.opensymphony.xwork2.inject.Inject;
+import edu.uga.radiantweb.freemarker.ConfigurationFactory;
 import edu.uga.radiantweb.freemarker.model.OntologySearchResult;
 import freemarker.template.*;
 import org.apache.log4j.Logger;
@@ -29,20 +31,12 @@ public class SearchOntologyTerm extends ActionSupport {
 	private String term;
 	private String errormsg;
 	private String innerHtml;
+
+    @Inject("freemarkerConfiguration")
+    private ConfigurationFactory freemarkerConfig;
 	
 	public String execute() {
-		/**
-         * For testing purposes only. This should be moved out from here.
-         *
-		* */
-        Configuration cfg = new Configuration();
-
-        cfg.setServletContextForTemplateLoading(ServletActionContext.getServletContext(), "/templates");
-        cfg.setObjectWrapper(new DefaultObjectWrapper());
-        cfg.setDefaultEncoding("UTF-8");
-        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
-        cfg.setIncompatibleImprovements(new Version(2, 3, 20));
- 	    Logger logger = RadiantToolConfig.getLogger();
+		Logger logger = RadiantToolConfig.getLogger();
 		errormsg = "";
 		
 		@SuppressWarnings("rawtypes")
@@ -83,7 +77,7 @@ public class SearchOntologyTerm extends ActionSupport {
             i++;
         }
         try {
-            Template temp = cfg.getTemplate("OntologySearchResults.ftl");
+            Template temp = freemarkerConfig.getConfig().getTemplate("OntologySearchResults.ftl");
             temp.process(templateModel, buf);
         } catch (IOException e) {
             e.printStackTrace();

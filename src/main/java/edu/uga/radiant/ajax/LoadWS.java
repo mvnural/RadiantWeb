@@ -1,10 +1,17 @@
 package edu.uga.radiant.ajax;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.opensymphony.xwork2.inject.Inject;
+import edu.uga.radiantweb.freemarker.ConfigurationFactory;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -18,7 +25,6 @@ import edu.uga.cs.wstool.parser.sawadl.WADLParser;
 import edu.uga.cs.wstool.parser.sawsdl.SAWSDLParser;
 import edu.uga.cs.wstool.parser.xml.XMLParser;
 import edu.uga.radiant.printTree.LoadWADLTree;
-import edu.uga.radiant.printTree.LoadWSDLTree;
 import edu.uga.radiant.util.QueryManager;
 import edu.uga.radiant.util.RadiantToolConfig;
 
@@ -33,7 +39,12 @@ public class LoadWS extends ActionSupport {
 	private String type;
 	private String innerTreeHtml;
 	private File WSFile;
-	
+
+    /** The freemarker configuration bean used for creating fremarker templates. Injected by Struts as defined in Struts.xml
+     */
+    @Inject("freemarkerConfiguration")
+    private ConfigurationFactory freemarkerConfig;
+
 	@SuppressWarnings("unchecked")
 	public String execute() {
 		
@@ -42,113 +53,137 @@ public class LoadWS extends ActionSupport {
 		String wsdlExt = ".wsdl";
 		String sawadlExt = ".sawadl";
 		String wadlExt = ".wadl";
-		StringBuffer buf = new StringBuffer();
 
-		SAXBuilder sbuilder = new SAXBuilder();
+        SAXBuilder sbuilder = new SAXBuilder();
         Document doc = null;
-        
-		@SuppressWarnings("rawtypes")
+
+        @SuppressWarnings("rawtypes")
 		Map session = ActionContext.getContext().getSession();
-		String importURL = "";
+        String importURL = "";
         errormsg = "";
         String filename = "";
-        
-        logger.debug("wsloc = " + wsloc);
-		if (WSFile != null) logger.debug("WSFile size = " + WSFile.getTotalSpace());
-		
-		try {
-			XMLParser wsParser = null;
-			session.remove("wsname");
-			session.remove("wsdlparser");
-			session.remove("wadlparser");
-			//If it is a remote file
-			if (wsloc.indexOf("http:") != -1){	
-	        	importURL = wsloc;
-        		doc = sbuilder.build(importURL);
-	        	if (isWSDL(doc)){
-					wsParser = new SAWSDLParser(doc);
-		        	session.put("wsdlparser", wsParser);
-		        	session.remove("wadlparser");
-		        	
-	        	}else if (isWADL(doc)){
-					wsParser = new WADLParser(doc);
-		        	session.put("wadlparser", wsParser);
-		        	session.remove("wsdlparser");
 
-	        	}
-	        	int start = importURL.lastIndexOf("/");
-	        	filename = importURL.substring(start, importURL.length());
-	        	filename = QueryManager.getUniqueFileName(filename);
-	        	session.put("wsname", filename);
-        	// The document is being fetched from the database
-			}else if(wsloc.startsWith("db:")){
-				filename = wsloc.substring(3); 
-				String documentXml = QueryManager.getServiceXml(filename);
-				doc = sbuilder.build(new StringReader(documentXml));
-				if(isWSDL(doc)){
-					wsParser = new SAWSDLParser(doc);
-	    			session.put("wsdlparser", wsParser);
-				}else{
-					wsParser = new WADLParser(doc);
-    	        	session.put("wadlparser", wsParser);
-				}
-    			
-	        	session.put("wsname", filename);
-				
-			// Document is being uploaded from computer
-			}else{
-	        	if (WSFile != null){
-	        		filename = QueryManager.getUniqueFileName(wsloc);
-	        		doc = sbuilder.build(WSFile);
-	        		if (isWSDL(doc)){
-	        			wsParser = new SAWSDLParser(doc);
-	    	        	session.put("wsdlparser", wsParser);
-	    	        	session.put("wsname", filename);
-	    		    }else if (isWADL(doc)){
-	        			wsParser = new WADLParser(doc);
-	    	        	session.put("wadlparser", wsParser);
-	    	        	session.put("wsname", filename);
-	    		    }else{
-	        			errormsg = "File is not wsdl or wadl file.";
-	        		}
-	        	}else{
-	        		errormsg = "WSDL file lost.";
-	        	}
-	        }
-			
-			if (wsParser == null){
-				errormsg = "Web service document is invalid";
-				return ERROR;
-			}
-			
-			if(isWSDL(doc)){
-	            
-				boolean hasSAWSDLNS = false;
-	            @SuppressWarnings("rawtypes")
+        logger.debug("wsloc = " + wsloc);
+        if (WSFile != null) logger.debug("WSFile size = " + WSFile.getTotalSpace());
+
+        try {
+            XMLParser wsParser = null;
+            session.remove("wsname");
+            session.remove("wsdlparser");
+            session.remove("wadlparser");
+            //If it is a remote file
+            if (wsloc.indexOf("http:") != -1){
+                importURL = wsloc;
+                doc = sbuilder.build(importURL);
+                if (isWSDL(doc)){
+                    wsParser = new SAWSDLParser(doc);
+                    session.put("wsdlparser", wsParser);
+                    session.remove("wadlparser");
+
+                }else if (isWADL(doc)){
+                    wsParser = new WADLParser(doc);
+                    session.put("wadlparser", wsParser);
+                    session.remove("wsdlparser");
+
+                }
+                int start = importURL.lastIndexOf("/");
+                filename = importURL.substring(start, importURL.length());
+                filename = QueryManager.getUniqueFileName(filename);
+                session.put("wsname", filename);
+                // The document is being fetched from the database
+            }else if(wsloc.startsWith("db:")){
+                filename = wsloc.substring(3);
+                String documentXml = QueryManager.getServiceXml(filename);
+                doc = sbuilder.build(new StringReader(documentXml));
+                if(isWSDL(doc)){
+                    wsParser = new SAWSDLParser(doc);
+                    session.put("wsdlparser", wsParser);
+                }else{
+                    wsParser = new WADLParser(doc);
+                    session.put("wadlparser", wsParser);
+                }
+
+                session.put("wsname", filename);
+
+                // Document is being uploaded from computer
+            }else{
+                if (WSFile != null){
+                    filename = QueryManager.getUniqueFileName(wsloc);
+                    doc = sbuilder.build(WSFile);
+                    if (isWSDL(doc)){
+                        wsParser = new SAWSDLParser(doc);
+                        session.put("wsdlparser", wsParser);
+                        session.put("wsname", filename);
+                    }else if (isWADL(doc)){
+                        wsParser = new WADLParser(doc);
+                        session.put("wadlparser", wsParser);
+                        session.put("wsname", filename);
+                    }else{
+                        errormsg = "File is not wsdl or wadl file.";
+                    }
+                }else{
+                    errormsg = "WSDL file lost.";
+                }
+            }
+
+            if (wsParser == null){
+                errormsg = "Web service document is invalid";
+                return ERROR;
+            }
+
+            if(isWSDL(doc)){
+
+                boolean hasSAWSDLNS = false;
+                @SuppressWarnings("rawtypes")
 				List nameSpaces = doc.getRootElement().getAdditionalNamespaces();
-	            for(int i = 0 ; i < nameSpaces.size(); i++){
-	                Namespace ns = (Namespace)nameSpaces.get(i);
-	                if(ns != null && ns.getURI() != null && SAWSDLParser.sawsdlNS != null && SAWSDLParser.sawsdlNS.getURI() != null && ns.getURI().equalsIgnoreCase(SAWSDLParser.sawsdlNS.getURI())){
-	                    hasSAWSDLNS = true;
-	                    break;
-	                }
-	            }
-	            if(!hasSAWSDLNS){
-	                if (SAWSDLParser.sawsdlNS != null) doc.getRootElement().addNamespaceDeclaration(SAWSDLParser.sawsdlNS);
-	            }
-	        
-	            boolean wsdlV1 = ((SAWSDLParser) wsParser).isWsdlV1();
-	            if(wsdlV1 == true){
-	            	LoadWSDLTree.loadWSDL((SAWSDLParser) wsParser, buf, filename);   
-	            }else{
-	            	// not implemented yet
-	            }
-	            innerTreeHtml = buf.toString();
-	            type = "wsdl";
-	        }
+                for(int i = 0 ; i < nameSpaces.size(); i++){
+                    Namespace ns = (Namespace)nameSpaces.get(i);
+                    if(ns != null && ns.getURI() != null && SAWSDLParser.sawsdlNS != null && SAWSDLParser.sawsdlNS.getURI() != null && ns.getURI().equalsIgnoreCase(SAWSDLParser.sawsdlNS.getURI())){
+                        hasSAWSDLNS = true;
+                        break;
+                    }
+                }
+                if(!hasSAWSDLNS){
+                    if (SAWSDLParser.sawsdlNS != null) doc.getRootElement().addNamespaceDeclaration(SAWSDLParser.sawsdlNS);
+                }
+
+                boolean wsdlV1 = ((SAWSDLParser) wsParser).isWsdlV1();
+
+                StringWriter buf = new StringWriter();
+                if(wsdlV1 == true){
+                    //LoadWSDLTree.loadWSDL((SAWSDLParser) wsParser, buf, filename);
+
+                    Map templateModel = new HashMap();
+                    templateModel.put("fileName", filename);
+                    templateModel.put("portTypes", ((SAWSDLParser) wsParser).getDefinition().getPortTypes().values());
+                    templateModel.put("operations",((SAWSDLParser) wsParser).getAllOperations().values());
+
+                    org.w3c.dom.Element defDoc = ((SAWSDLParser) wsParser).getDefinition().getDocumentationElement();
+                    String documentDefinition = "";
+                    if(defDoc != null){
+                        documentDefinition = defDoc.getTextContent() != null ? defDoc.getTextContent() : "";
+                    }
+                    templateModel.put("documentDefinition", documentDefinition);
+                    try {
+                        Template temp = freemarkerConfig.getConfig().getTemplate("DocumentViewer.ftl");
+                        temp.process(templateModel, buf);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (TemplateException e) {
+                        e.printStackTrace();
+                    }
+
+                }else{
+                    // not implemented yet
+                }
+                innerTreeHtml = buf.toString();
+                type = "wsdl";
+            }
 	        else if(isWADL(doc)){
-	        	// not implemented yet
-	        	LoadWADLTree.loadWADL((WADLParser) wsParser, buf, wsloc);
+                // not implemented yet
+                //TODO Convert loadWADL to freemarker template also
+                StringBuffer buf = new StringBuffer();
+                LoadWADLTree.loadWADL((WADLParser) wsParser, buf, wsloc);
 	        	innerTreeHtml = buf.toString();
 	        	type = "wadl";
 	        }

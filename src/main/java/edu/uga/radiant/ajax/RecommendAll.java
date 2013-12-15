@@ -103,14 +103,14 @@ public class RecommendAll extends ActionSupport {
 				for (OperationOBJ op : ((SAWSDLParser) wsparser).getAllOperations().values()){
 					
 					MessageOBJ in = op.getInput();
-					simples.addAll(in.getSimpletype());
-					for (ComplexTypeOBJ cplex : in.getComplextype()){
+					simples.addAll(in.getSimpleType());
+					for (ComplexTypeOBJ cplex : in.getComplexType()){
 						simples.addAll(SAWSDLParser.getAllSimpleType(cplex));
 					}
 
 					MessageOBJ out = op.getOutput();
-					simples.addAll(out.getSimpletype());
-					for (ComplexTypeOBJ cplex : out.getComplextype()){
+					simples.addAll(out.getSimpleType());
+					for (ComplexTypeOBJ cplex : out.getComplexType()){
 						simples.addAll(SAWSDLParser.getAllSimpleType(cplex));
 					}
 					

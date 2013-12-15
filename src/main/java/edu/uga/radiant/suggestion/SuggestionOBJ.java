@@ -2,33 +2,33 @@ package edu.uga.radiant.suggestion;
 
 public class SuggestionOBJ {
 	
-	private String ConceptIRI;
-	private String ConceptLabel;
-	private String ConceptDoc;
+	private String conceptIRI;
+	private String conceptLabel;
+	private String conceptDoc;
 	private double score;
 	
 	public void setConceptIRI(String conceptIRI) {
-		ConceptIRI = conceptIRI;
+		this.conceptIRI = conceptIRI;
 	}
 	
 	public String getConceptIRI() {
-		return ConceptIRI;
+		return conceptIRI;
 	}
 	
 	public void setConceptLabel(String conceptLabel) {
-		ConceptLabel = conceptLabel;
+		this.conceptLabel = conceptLabel;
 	}
 	
 	public String getConceptLabel() {
-		return ConceptLabel;
+		return conceptLabel;
 	}
 
 	public void setConceptDoc(String conceptDoc) {
-		ConceptDoc = conceptDoc;
+		this.conceptDoc = conceptDoc;
 	}
 
 	public String getConceptDoc() {
-		return ConceptDoc;
+		return conceptDoc;
 	}
 
 	public void setScore(double score) {

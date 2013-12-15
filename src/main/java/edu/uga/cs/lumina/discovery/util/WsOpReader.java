@@ -70,7 +70,8 @@ public class WsOpReader {
     	List<WsOpReader> wsdlOps = new ArrayList<WsOpReader>();
         if (wsdlInstances.containsKey(name + "." + type)) {
         	String md5 = wsdlMD5Instances.get(name + "." + type);
-        	String oldMD5 = QueryManager.getMD5(conn, name, type);
+        	//String oldMD5 = QueryManager.getMD5(conn, name, type);
+            String oldMD5 = "";
         	if (md5 != null && oldMD5 != null){
         		if (md5.equals(oldMD5)){
             		wsdlOps = wsdlInstances.get(name + "." + type);

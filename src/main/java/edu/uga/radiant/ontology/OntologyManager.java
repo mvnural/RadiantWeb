@@ -1154,8 +1154,8 @@ public class OntologyManager {
     
     /**
      * Returns the definition of class in a certain ontology
-     * @param OWLClass: cls
-     * @param OWLOntology: ont
+     * @param OWLClass cls
+     * @param OWLOntology ont
      * @return  String: definition
      */
     private String getDefinition(OWLClass cls,OWLOntology ont){

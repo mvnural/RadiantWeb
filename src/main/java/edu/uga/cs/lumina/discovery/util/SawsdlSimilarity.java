@@ -51,13 +51,13 @@ public class SawsdlSimilarity {
     	
     	// set the request complex types 
     	List<ComplexTypeOBJ> ReqComplexs = new ArrayList<ComplexTypeOBJ>();
-    	for(ComplexTypeOBJ obj : req.getInput().getComplextype()){
+    	for(ComplexTypeOBJ obj : req.getInput().getComplexType()){
     		ReqComplexs.addAll(getNestedComplexType(obj));
     	}
     	
     	// set the web service complex types
     	List<ComplexTypeOBJ> WsComplexs = new ArrayList<ComplexTypeOBJ>();
-    	for(ComplexTypeOBJ obj : ws.getInput().getComplextype()){
+    	for(ComplexTypeOBJ obj : ws.getInput().getComplexType()){
     		WsComplexs.addAll(getNestedComplexType(obj));
     	}
     	
@@ -130,12 +130,12 @@ public class SawsdlSimilarity {
     	
     	// get score simple types of rest complex type 
     	List<SimpleTypeOBJ> request = new ArrayList<SimpleTypeOBJ>();
-    	request.addAll(req.getInput().getSimpletype());
+    	request.addAll(req.getInput().getSimpleType());
     	for (ComplexTypeOBJ complex : ReqComplexs){
     		request.addAll(SAWSDLParser.getAllSimpleType(complex));
     	}
     	List<SimpleTypeOBJ> service = new ArrayList<SimpleTypeOBJ>();
-    	service.addAll(ws.getInput().getSimpletype());
+    	service.addAll(ws.getInput().getSimpleType());
     	for (ComplexTypeOBJ complex : WsComplexs){
     		service.addAll(SAWSDLParser.getAllSimpleType(complex));
     	}
@@ -156,7 +156,7 @@ public class SawsdlSimilarity {
         double simpleScore = (request.size() > service.size()) ? hungarian(Hungarian.transpose(matrix)): hungarian(matrix);  
         
         // return score
-        if (req.getInput().getComplextype().size() == 0){
+        if (req.getInput().getComplexType().size() == 0){
         	// request has no complex type 
         	return simpleScore;
         }else if(request.size() == 0){
@@ -172,13 +172,13 @@ public class SawsdlSimilarity {
 	public static double oupSim(WsOpReader req, WsOpReader ws, String owlURI) throws Exception{
     	// set the request complex types 
     	List<ComplexTypeOBJ> ReqComplexs = new ArrayList<ComplexTypeOBJ>();
-    	for(ComplexTypeOBJ obj : req.getOutput().getComplextype()){
+    	for(ComplexTypeOBJ obj : req.getOutput().getComplexType()){
     		ReqComplexs.addAll(getNestedComplexType(obj));
     	}
     	
     	// set the web service complex types
     	List<ComplexTypeOBJ> WsComplexs = new ArrayList<ComplexTypeOBJ>();
-    	for(ComplexTypeOBJ obj : ws.getOutput().getComplextype()){
+    	for(ComplexTypeOBJ obj : ws.getOutput().getComplexType()){
     		WsComplexs.addAll(getNestedComplexType(obj));
     	}
     	
@@ -251,12 +251,12 @@ public class SawsdlSimilarity {
     	
     	// get score simple types of rest complex type 
     	List<SimpleTypeOBJ> request = new ArrayList<SimpleTypeOBJ>();
-    	request.addAll(req.getOutput().getSimpletype());
+    	request.addAll(req.getOutput().getSimpleType());
     	for (ComplexTypeOBJ complex : ReqComplexs){
     		request.addAll(SAWSDLParser.getAllSimpleType(complex));
     	}
     	List<SimpleTypeOBJ> service = new ArrayList<SimpleTypeOBJ>();
-    	service.addAll(ws.getOutput().getSimpletype());
+    	service.addAll(ws.getOutput().getSimpleType());
     	for (ComplexTypeOBJ complex : WsComplexs){
     		service.addAll(SAWSDLParser.getAllSimpleType(complex));
     	}
@@ -277,7 +277,7 @@ public class SawsdlSimilarity {
         double simpleScore = (request.size() > service.size()) ? hungarian(Hungarian.transpose(matrix)): hungarian(matrix);  
         
         // return score
-        if (req.getOutput().getComplextype().size() == 0){
+        if (req.getOutput().getComplexType().size() == 0){
         	// request has no complex type 
         	return simpleScore;
         }else if(request.size() == 0){
@@ -317,12 +317,12 @@ public class SawsdlSimilarity {
     	List<ComplexTypeOBJ> result = new ArrayList<ComplexTypeOBJ>();
     	result.add(obj);
     	List<ComplexTypeOBJ> subCplex = new ArrayList<ComplexTypeOBJ>();
-    	subCplex = obj.getComplextypes();
+    	subCplex = obj.getComplexTypes();
     	while (subCplex.size() > 0){
     		List<ComplexTypeOBJ> nextLevel = new ArrayList<ComplexTypeOBJ>();
     		for (ComplexTypeOBJ cplex : subCplex){
     			result.add(cplex);
-    			nextLevel.addAll(cplex.getComplextypes());
+    			nextLevel.addAll(cplex.getComplexTypes());
     		}
     		subCplex = nextLevel;
     	}

@@ -261,7 +261,7 @@ public class DiscoveryManager {
 			obj.setType(_inputTypes[i]);
 			simples.add(obj);
 		}
-		in.setSimpletype(simples);
+		in.setSimpleType(simples);
 		
 		
 		//define output Parameter  in MessageOBJ 
@@ -282,7 +282,7 @@ public class DiscoveryManager {
 			obj.setType(_outputTypes[i]);
 			simples.add(obj);
 		}
-		out.setSimpletype(simples);
+		out.setSimpleType(simples);
 		
 		
 		// create request template

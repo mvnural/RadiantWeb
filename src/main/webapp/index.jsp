@@ -66,8 +66,11 @@ $(document).ready(function(){
 		<br />
 		<h1>More Info</h1>
 		<div class="tit_bot">
-			<a href="http://mango.ctegd.uga.edu/jkissingLab/SWS/RadiantWeb/RadiantWebUsersGuide.pdf">RadiantWeb User's Guide </a> <br />
-				<a href="http://mango.ctegd.uga.edu/jkissingLab/SWS/RadiantWeb/index.html">Radiant Website </a> <br>  
+		
+			<div class="right_b">
+			<a href="http://mango.ctegd.uga.edu/jkissingLab/SWS/RadiantWeb/RadiantWebUsersGuide.pdf">RadiantWeb User's Guide </a> <br /></div>
+				<div class="right_b"><a href="http://mango.ctegd.uga.edu/jkissingLab/SWS/RadiantWeb/index.html">Radiant Website </a> <br>
+			 
 			</div>
 			<hr />
 

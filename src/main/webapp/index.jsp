@@ -43,14 +43,18 @@ $(document).ready(function(){
 					&nbsp;
 				</s:if>
 				<s:if test="#session.login != 'true'">  
+					
 					<s:form action="login" theme="simple" method="POST">
+					
 						<h3>User Login</h3>
 						<label for="text1">Username </label>
 						<input id="text1" type="text" name="userID" value="" /><br />
 						<label for="text2">Password </label>
 						<input id="text2" type="password" name="password" value="" /><br />
 						<input type="submit" id="login-submit" value="" />
+						
 					</s:form>
+					
 					<s:iterator value="loginError" id="ErrorMesg">
 						<font color="#FF0000"><s:property value="ErrorMesg" /></font>
 						<br/>
@@ -60,17 +64,23 @@ $(document).ready(function(){
 							<td><a id="guestAccount" href="#"><h2>Use guest account</h2></a></td>
 						</tr>
 					</table>
+						<table>
+					<tr>
+						<td width="120px"><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="createAccount.jsp">Create account</a></td>
+						<td><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="forgotpassword.jsp">Forgot password</a></td>
+						</tr>
+						</table>
 				</s:if> 
 			</div>
 		</div>
 		<br />
 		<h1>More Info</h1>
 		<div class="tit_bot">
-		<!-- Links to the Documentations -->
+		
 			<div class="right_b">
 			<a href="http://mango.ctegd.uga.edu/jkissingLab/SWS/RadiantWeb/RadiantWebUsersGuide.pdf">RadiantWeb User's Guide </a> <br /></div>
 				<div class="right_b"><a href="http://mango.ctegd.uga.edu/jkissingLab/SWS/RadiantWeb/index.html">RadiantWeb Website </a> <br>
-			 
+				
 			</div>
 			<hr />
 

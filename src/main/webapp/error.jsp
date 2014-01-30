@@ -44,7 +44,7 @@
                           </s:iterator>
                     		<table>
 								<tr>
-									<td width="120px"><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="/Radiant/createAccount.jsp">Create account</a></td>
+									<td width="120px"><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="createAccount.jsp">Create account</a></td>
 									<td><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="/Radiant/forgotpass.jsp">Forgot password</a></td>
 								</tr>
 							</table>
@@ -54,6 +54,8 @@
             </div>  
             <div id="left">
           		<h2>Error Message</h2>
+          		
+          		
        	  	</div>
        	    <div id="center">
        	  		<br />

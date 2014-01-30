@@ -32,12 +32,14 @@
 				</s:if>
 				<s:if test="#session.login != 'true'">  
 					<s:form action="login" theme="simple" method="POST">
+					
 						<h3>User Login</h3>
 						<label for="text1">Username </label>
 						<input id="text1" type="text" name="userID" value="" /><br />
 						<label for="text2">Password </label>
 						<input id="text2" type="password" name="password" value="" /><br />
 						<input type="submit" id="login-submit" value="" />
+					
 					</s:form>
 					<s:iterator value="loginError" id="ErrorMesg">
 						<font color="#FF0000"><s:property value="ErrorMesg" /></font>
@@ -45,7 +47,7 @@
 					</s:iterator>
 					<table>
 						<tr>
-							<td width="120px"><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="/Radiant/createAccount.jsp">Create account</a></td>
+							<td width="120px"><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="createAccount.jsp">Create account</a></td>
 							<td><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="/Radiant/forgotpass.jsp">Forgot password</a></td>
 						</tr>
 					</table>

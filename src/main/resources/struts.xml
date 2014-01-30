@@ -47,6 +47,14 @@
 		<result name="error">/error.jsp</result>
 		<result name="success" type="redirectAction">listUserServices</result>
 	</action>
+	<action name="createuser" class="edu.uga.cs.radiant.struts2.action.Createuser">
+		<result name="error">/error.jsp</result>
+		<result name="success" >/redirection.jsp</result>
+	</action>
+	<action name="forgotpassword" class="edu.uga.cs.radiant.struts2.action.Forgotpassword">
+		<result name="error">/error.jsp</result>
+		<result name="success" >/redirectiont.jsp</result>
+	</action>
 	
 	<!-- logout action -->
 	<action name="logout" class="edu.uga.cs.radiant.struts2.action.Logout">

@@ -4,18 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Success</title>
 </head>
 <body>
 
 <div id="left">
-		<h2>SUCCESS</h2>
-		<div class="col_l">
-			<span>  Password has been sent to your Email ID. </span><br />
-			<h2><a href="/radiantweb/index.jsp"> Click here to return to Login </a></h2>
-			<br />
-		</div>
-	</div>
+<h2>SUCCESS</h2>
+<div class="col_l">
+<span>  Password has been sent to your Email ID. </span><br />
+<h2><a href="/radiantweb/index.jsp"> Click here to return to Login </a></h2><br />
+</div>
+</div>
 
 </body>
 </html>

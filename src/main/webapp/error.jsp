@@ -44,7 +44,7 @@
                     <table>
 <tr>
 <td width="120px"><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="createAccount.jsp">Create account</a></td>
-<td><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="forgotpassword.jsp">Forgot password</a></td>
+<td><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="forgotPassword.jsp">Forgot password</a></td>
 </tr>
 </table>
 </s:if> 

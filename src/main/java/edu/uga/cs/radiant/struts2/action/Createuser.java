@@ -1,17 +1,18 @@
 package edu.uga.cs.radiant.struts2.action;
-import java.util.Map;
+
 import java.util.Vector;
-import com.opensymphony.xwork2.ActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
+
+import edu.uga.radiant.util.DataBaseConnection;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.lang.ClassNotFoundException;
 public class Createuser extends ActionSupport
 {
+private static final long serialVersionUID = 1L;
 private String name;
 private String email;
 private String organization = null;
@@ -64,10 +65,15 @@ this.retypepassword = retypepassword;
 }
 public String execute()
 {
-Connection connection = null;
-Statement statement = null;
+//Connection connection = null;
+//Statement statement = null;
 loginError = new Vector<String>();
 vecError = new Vector<String>();
+ResultSet rs;
+PreparedStatement pstmt = null;
+DataBaseConnection dbcn = null;
+dbcn = new DataBaseConnection();
+Connection conn = dbcn.getConnection(); 
 
 if(email.length() == 0)
 {
@@ -122,16 +128,25 @@ return ERROR;
 //	}
 try
 {
+/*
 //System.out.println("Connection to Driver");
 Class.forName("org.hsqldb.jdbcDriver");
 //System.out.println("Connection to Driver Successfull");
 //System.out.println("Connection to DataBase");
 connection = DriverManager.getConnection("jdbc:hsqldb:file:/home/aravindk/Desktop/HSQLDB/radiantNew", "SA", "");
 //System.out.println("Connection to DataBase Successfull");
+
 String query = "select USERNAME from USER where USERNAME = ?"; 
 PreparedStatement statm = connection.prepareStatement(query);
 statm.setString(1, userId);
 ResultSet rs = statm.executeQuery();
+*/
+String query = "select USERNAME from USER where USERNAME = ?"; 
+pstmt = conn.prepareStatement(query);
+pstmt.setString(1, userId);		
+// get result
+rs = pstmt.executeQuery();
+
 if(rs.next())
 {
 errorMesg = "Username Already Exists!";
@@ -141,8 +156,9 @@ messageType = "error";
 return ERROR;
 }
 String sql= "INSERT INTO USER (USERNAME, PASS, TYPE, NAME, EMAIL, ORGANIZATION) VALUES ('"+userId+"', '"+password+"', 'student', '"+name+"', '"+email+"', '"+organization+"')";
-int action = connection.createStatement().executeUpdate(sql);
-connection.setAutoCommit(true);
+
+int action = conn.createStatement().executeUpdate(sql);
+conn.setAutoCommit(true);
 if(action >= 1)
 {
 //System.out.println("Data Saved in DataBase");
@@ -152,7 +168,7 @@ else
 //System.out.println("Cannot Save Data in DB");
 }
 }
-catch(ClassNotFoundException error)
+/*catch(ClassNotFoundException error)
 {
 System.out.println("Error " + error.getMessage());
 errorMesg = "Database Error";
@@ -160,7 +176,7 @@ loginError.add(errorMesg);
 vecError.add(errorMesg);
 messageType = "error";
 return ERROR;
-}
+}*/
 catch(SQLException error)
 {
 //System.out.println("Error " + error.getMessage());
@@ -172,14 +188,35 @@ return ERROR;
 }
 finally
 {
-if(connection != null)
+	
+if(conn != null)
+{
 try
 {
-connection.close();
+conn.close();
 }
 catch(SQLException ignore)
 {
 }
+}
+
+if(pstmt != null)
+{
+try
+{
+pstmt.close();
+}
+catch(SQLException ignore)
+{
+}
+}
+
+if(dbcn != null)
+{
+dbcn.close();
+}
+
+/*
 if(statement != null)
 try
 {
@@ -188,6 +225,7 @@ statement.close();
 catch(SQLException ignore)
 {
 }
+*/
 }
 return "success";
 }

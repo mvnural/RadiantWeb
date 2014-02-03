@@ -537,11 +537,11 @@ $(function() {
 		<div style="width:100%; padding:4px;">
 			<s:form id="owl_form" action="loadOWL" theme="simple" method="POST" enctype="multipart/form-data">
 				<div id="owl-location" style="width:100%; height:auto; float:left; padding:4px;">
-					Owl Location <input type="text" id="owlloc" name="owlloc" size="38" >
+					Ontology OWL file Location <input type="text" id="owlloc" name="owlloc" size="38" >
 				</div>
 				<input type="hidden" name="page" value="wsdl" />
 				<input type="button" style='z-index:1;width:80px;height:24px;font-size:12px;' value="Browse" id="owlfilebutton" onclick="hitFileBtn('OWLFile');" >
-				<input type="submit" id="submit_owl_ajax" value="Load OWL" style="width:80px;height:24px;" onclick="getTabIndex();" />
+				<input type="submit" id="submit_owl_ajax" value="Load Ontology" style="width:102px;height:24px;" onclick="getTabIndex();" />
 <!-- 				<input id="recommend-ontology" type="button" style='z-index:1; width:120px; height:24px; font-size:12px; opacity: 0;' value="Recommend Ontology" > -->
 				<input type="file" style="display: none;" id="OWLFile" name="OWLFile" size="1" onchange="selectfile('OWLFile','owlloc')"/>
 				<input type="hidden" id="input-ontology-tab" name="tabIndex" value="0" />
@@ -590,6 +590,8 @@ $(function() {
         
         <div id="owltabs" class="tabber" style="padding:2px;">
             <div id="owl1" class='tabbertab' style="height:395px; overflow: auto"><h2>Ontology 1</h2></div>
+            <div id="owl2" class='tabbertab' style="height:395px; overflow: auto"><h2>Ontology 2</h2></div>
+            <div id="owl3" class='tabbertab' style="height:395px; overflow: auto"><h2>Ontology 3</h2></div>
         </div>
             
         <div id="importErrorDialog" title="Import Error">

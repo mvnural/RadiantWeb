@@ -29,7 +29,7 @@ $("#text2").attr("value","guestPass");
 </s:url>'>Logout</a>
 </font>
 <br/>
- 	<img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;"/><a href="/TKSS/changePass.jsp">Change Password</a>
+ 	<img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;"/><a href="resetPassword.jsp">Change Password</a>
  	<br/>
 <s:if test="#session.accountType == 'admin'">
 <a href= '<s:url action="showBug" >

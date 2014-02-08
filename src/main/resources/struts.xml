@@ -61,11 +61,16 @@
 		<result name="error">/error.jsp</result>
 		<result name="success">/index.jsp</result>
 	</action>
-	
+
 	<!-- Get user services -->
 	<action name="listUserServices" class="edu.uga.cs.radiant.struts2.action.ListUserServices">
 		<result name="error">/index.jsp</result>
 		<result name="success">/myPage.jsp</result>
+	</action>
+	
+	<action name="resetpass" class="edu.uga.cs.radiant.struts2.action.ResetPass">
+		<result name="error">/errorPass.jsp</result>
+		<result name="success" >/resetPasswordSuccess.jsp</result>
 	</action>
 	
 </package>

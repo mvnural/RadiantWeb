@@ -21,7 +21,7 @@
 						</s:url>'>Logout</a>
 					</font>
                     <br/>
-                    <img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;"/><a href="/TKSS/changePass.jsp">Change Password</a>
+                    <img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;"/><a href="resetPassword.jsp">Change Password</a>
                     <br/>
                     <s:if test="#session.accountType == 'admin'">
 						<a href= '<s:url action="showBug" >
@@ -48,7 +48,7 @@
 					<table>
 						<tr>
 							<td width="120px"><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="createAccount.jsp">Create account</a></td>
-							<td><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="/Radiant/forgotpass.jsp">Forgot password</a></td>
+							<td><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="forgotPassword.jsp">Forgot password</a></td>
 						</tr>
 					</table>
 				</s:if> 

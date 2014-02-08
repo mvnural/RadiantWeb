@@ -16,9 +16,12 @@
          
 <tr><td> Email address :</td>
 <td><input type="text" name="email" value="" /></td></tr>
+  
+<tr> <td> <label>            </br></label> </td> </tr><tr> 
                     
-<tr><td><input type="submit" value="Submit" /></td>
-<td><input type="reset" value="Reset" /></td></tr>
+<td><input type="submit" id="submit" style="font-face: 'Comic Sans MS'; font-size: small; color: teal; background-color: #FFFFF; border: 2pt ridge lightgrey" value="Submit" /></td>
+<td><input type="reset" id="reset" style="font-face: 'Comic Sans MS'; font-size: small; color: teal; background-color: #FFFFF; border: 2pt ridge lightgrey" value=" Reset " /></td></tr>
+ 
                     
 </table>
                  

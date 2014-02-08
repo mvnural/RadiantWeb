@@ -11,7 +11,7 @@
 <div id="left">
 <h2>SUCCESS</h2>
 <div class="col_l">
-<span>  Password has been sent to your Email ID. </span><br />
+<span>  New Password has been generated and sent to your Email address. </span><br />
 <h2><a href="/radiantweb/index.jsp"> Click here to return to Login </a></h2><br />
 </div>
 </div>

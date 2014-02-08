@@ -267,6 +267,36 @@ padding-top: 5px;}
 	margin: 15px 0px 10px 200px;
 }
 
+#submit{
+	 background-color: #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:6px;
+    color: #fff;
+    font-family: 'Oswald';
+    font-size: 15px;
+    font-color: #12537C;
+    text-decoration: none;
+    cursor: pointer;
+    border:none;
+	
+}
+
+#reset{
+	 background-color: #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:6px;
+    color:#FFFFFF;
+    font-family: 'Oswald';
+    font-size: 15px;
+    font-color: #00ff00;
+    text-decoration: none;
+    cursor: pointer;
+    border:none;
+	
+}
+
 #text1, #text2 {
 	width: 250px;
 	height: 14px;

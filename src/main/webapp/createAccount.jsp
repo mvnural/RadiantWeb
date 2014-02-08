@@ -5,6 +5,7 @@ pageEncoding="ISO-8859-1"%> <%-- @author Aravind Kalimurthy, University of Georg
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
 <title>Create New User</title>
 </head>
 <body>
@@ -41,8 +42,8 @@ pageEncoding="ISO-8859-1"%> <%-- @author Aravind Kalimurthy, University of Georg
                     
 <tr> <td> <label>            </br></label> </td> </tr><tr>
 
-<td><input type="submit" value="Submit" /></td>
-<td><input type="reset" value="Reset" /></td></tr>
+<td><input type="submit" id="submit" style="font-face: 'Comic Sans MS'; font-size: small; color: teal; background-color: #FFFFF; border: 2pt ridge lightgrey" value="Submit" /></td>
+<td><input type="reset" id="reset" style="font-face: 'Comic Sans MS'; font-size: small; color: teal; background-color: #FFFFF; border: 2pt ridge lightgrey" value=" Reset " /></td></tr>
                     
  <tr><td> <p> * Marked are Required</p>  </td> </tr> 
 </table>

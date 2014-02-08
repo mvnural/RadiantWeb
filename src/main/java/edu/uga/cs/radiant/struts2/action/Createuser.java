@@ -69,8 +69,11 @@ public String execute()
 //Statement statement = null; 
 loginError = new Vector<String>(); 
 vecError = new Vector<String>(); 
+userId = userId.toLowerCase();
 ResultSet rs; 
+ResultSet rst;
 PreparedStatement pstmt = null; 
+PreparedStatement prsmt = null;
 DataBaseConnection dbcn = null; 
 dbcn = new DataBaseConnection(); 
 Connection conn = dbcn.getConnection();  
@@ -83,8 +86,8 @@ vecError.add(errorMesg);
 messageType = "error"; 
 return ERROR; 
 } 
-if(!(email.contains("@") && email.contains(".com"))) 
-{ 
+if(!(email.contains("@") && ( email.contains(".com") || email.contains(".edu") || email.contains(".org"))))
+{
 errorMesg = "Enter a valid Email address!"; 
 loginError.add(errorMesg); 
 vecError.add(errorMesg); 
@@ -155,6 +158,22 @@ vecError.add(errorMesg);
 messageType = "error"; 
 return ERROR; 
 } 
+
+String mailqry = "select EMAIL from USER where EMAIL = ?";  
+prsmt = conn.prepareStatement(mailqry); 
+prsmt.setString(1, email);         
+// get result 
+rst = prsmt.executeQuery(); 
+ 
+if(rst.next()) 
+{ 
+errorMesg = "Email address Already Exists!"; 
+loginError.add(errorMesg); 
+vecError.add(errorMesg); 
+messageType = "error"; 
+return ERROR; 
+} 
+
 String output= jceSha(password);
 //System.out.println("Converted String is :" +output);
 String sql= "INSERT INTO USER (USERNAME, PASS, TYPE, NAME, EMAIL, ORGANIZATION) VALUES ('"+userId+"', '"+output+"', 'user', '"+name+"', '"+email+"', '"+organization+"')"; 

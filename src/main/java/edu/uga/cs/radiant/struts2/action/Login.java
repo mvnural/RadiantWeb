@@ -56,7 +56,7 @@ public class Login extends ActionSupport
             pstmt.setString(1, username);        
             // get result
             rs = pstmt.executeQuery();
-          
+
             // get result
             rs.next();
             if (rs.getRow() == 0) 

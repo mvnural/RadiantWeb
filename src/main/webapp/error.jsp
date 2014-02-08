@@ -19,8 +19,13 @@
 <s:param name="page">index</s:param>
 </s:url>'>Logout</a></font>
                           <br/>
-                            <img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;"/><a href="/TKSS/changePass.jsp">Change Password</a>
+                            <img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;"/><a href="resetPass.jsp">Change Password</a>
                             <br/>
+                            
+                            <s:iterator value="vecError" id="ErrorMesg">
+&nbsp; &nbsp; &nbsp;<b><font size="+1" color="#FF0000"><s:property value="errormessage" /><br/><br/></font></b>
+</s:iterator>
+                            
                             <s:if test="#session.accountType == 'admin'">
 <a href= '<s:url action="showBug" >
 </s:url>'>System Bug</a>
@@ -28,10 +33,10 @@
                             <br/>
                             &nbsp;
 </s:if>
-<s:if test="#session.login != 'true'">  
+<s:if test="#session.login != 'true'">
  <s:form action="login" theme="simple" method="POST">
-                       	 	<h3>User Login</h3>
-           	<label for="text1">Username </label>
+                        <h3>User Login</h3>
+            <label for="text1">Username </label>
                             <input id="text1" type="text" name="userID" value="" /><br />
                             <label for="text2">Password </label>
                             <input id="text2" type="password" name="password" value="" /><br />
@@ -47,18 +52,19 @@
 <td><img src="images/fish_inp.png" title="" alt="" style="padding-right: 5px; padding-bottom: 2px;" /><a href="forgotPassword.jsp">Forgot password</a></td>
 </tr>
 </table>
-</s:if> 
+</s:if>
                     </div>
-              </div> 
-            </div>  
+              </div>
+            </div>
             <div id="left">
           <h2>Error Message</h2>
-       	 	</div>
-       	   <div id="center">
-       	 	<br />
+        </div>
+        <div id="center">
+        <br />
 <s:iterator value="vecError" id="ErrorMesg">
 &nbsp; &nbsp; &nbsp;<b><font size="+1" color="#FF0000"><s:property value="errormessage" /><br/><br/></font></b>
 </s:iterator>
-       	 	</div>
+        </div>
 </body>
 </html>
+

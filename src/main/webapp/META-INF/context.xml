@@ -11,7 +11,7 @@
     <Resource name="jdbc/HSQLDB" auth="Container"
         type="javax.sql.DataSource" username="SA" password=""
         driverClassName="org.hsqldb.jdbcDriver"
-        url="jdbc:hsqldb:file:/home/mnural/HSQLDB/radiantNew"
+        url="jdbc:hsqldb:file:/home/aravindk/Desktop/HSQLDB/radiantNew"
         maxActive="10" maxIdle="1" />
 </Context>
 <!--         url="jdbc:hsqldb:file:/var/lib/hsqldb/radiantNew" -->
